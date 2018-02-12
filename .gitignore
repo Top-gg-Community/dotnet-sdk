@@ -1,0 +1,4 @@
+*.user
+DiscordBotsList.Api/obj/
+DiscordBotsList.Api/bin/
+DiscordBotsList.Api/.vs/

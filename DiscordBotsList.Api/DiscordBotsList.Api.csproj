@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Velddev</Authors>
+    <Company></Company>
+    <Description>Discordbots.org api wrapper</Description>
+    <Copyright>Mike Veldsink</Copyright>
+    <PackageProjectUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>discord bots list org wrapper api</PackageTags>
+    <PackageReleaseNotes>First release</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyName>DiscordBotsList.Api</AssemblyName>
+    <RootNamespace>DiscordBotsList.Api</RootNamespace>
+    <Product>DiscordBotsList.Api</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Miki.Rest" Version="1.2.2" />
+  </ItemGroup>
+
+</Project>
