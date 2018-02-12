@@ -8,12 +8,11 @@ namespace DiscordBotsList.Api.Internal
     public class Entity : IEntity
     {
 		public ulong Id => id;
-
 		public string Username => username;
-
 		public string Discriminator => discriminator;
-
-		public string AvatarUrl => avatarUrl;
+		public string AvatarUrl => !string.IsNullOrEmpty(avatarUrl) ?
+			$"https://cdn.discordapp.com/{Id}/{avatarUrl}.png" :
+			defaultAvatarUrl;
 
 		[JsonProperty("id")]
 		internal ulong id;
@@ -28,7 +27,7 @@ namespace DiscordBotsList.Api.Internal
 		internal string avatarUrl;
 
 		[JsonProperty("defAvatar")]
-		internal string defAvatarUrl;
+		internal string defaultAvatarUrl;
 
 		public override string ToString()
 		{

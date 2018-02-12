@@ -8,30 +8,40 @@ namespace DiscordBotsList.Api.Internal
 	internal class User : Entity, IUser
 	{
 		[JsonProperty("bio")]
-		public string Biography;
+		internal string biography;
 
 		[JsonProperty("banner")]
-		public string BannerUrl;
+		internal string bannerUrl;
 
 		[JsonProperty("social")]
-		public SocialConnections Social;
+		internal SocialConnections social;
 
 		[JsonProperty("color")]
-		public string Color;
+		internal string color;
 
 		[JsonProperty("supporter")]
-		public bool IsSupporter;
+		internal bool isSupporter;
 
 		[JsonProperty("certifiedDev")]
-		public bool IsCertified;
+		internal bool isCertified;
 
 		[JsonProperty("mod")]
-		public bool IsModerator;
+		internal bool isModerator;
 
 		[JsonProperty("webMod")]
-		public bool IsWebModerator;
+		internal bool isWebModerator;
 
 		[JsonProperty("admin")]
-		public bool IsAdmin;
+		internal bool isAdmin;
+
+		public string Biography => biography;
+		public string BannerUrl => bannerUrl;
+		public SocialConnections Connections => social;
+		public string Color => color;
+		public bool IsSupporter => isSupporter;
+		public bool IsCertified => isCertified;
+		public bool IsModerator => isModerator;
+		public bool IsWebModerator => isWebModerator;
+		public bool IsAdmin => isAdmin;
 	}
 }
