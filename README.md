@@ -46,3 +46,7 @@ string widgetUrl = new SmallWidgetOptions()
 
 Generates ![](https://discordbots.org/api/widget/status/160105994217586689.svg?leftcolor=FFFFFF)
 
+### Download
+#### Nuget
+If you're using Nuget you can use find it with the ID `DiscordBotsList.Api` or use
+> Install-Package DiscordBotsList.Api
