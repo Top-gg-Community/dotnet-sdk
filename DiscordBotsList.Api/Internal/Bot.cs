@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DiscordBotsList.Api.Internal
 {
-    public class Bot : Entity, IBot
+    internal class Bot : Entity, IBot
 	{
 		internal DiscordBotListApi api;
 
