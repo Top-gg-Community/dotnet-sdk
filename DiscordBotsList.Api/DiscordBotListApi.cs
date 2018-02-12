@@ -54,7 +54,7 @@ namespace DiscordBotsList.Api
 		/// <typeparam name="T">Type of Bot</typeparam>
 		/// <param name="id">Discord id</param>
 		/// <returns>Bot object of type T</returns>
-		protected async Task<T> GetBotAsync<T>(ulong id) where T : Bot
+		internal async Task<T> GetBotAsync<T>(ulong id) where T : Bot
 		{
 			T t = await GetAsync<T>($"bots/{id}");
 			t.api = this;
