@@ -16,7 +16,7 @@ namespace DiscordBotsList.Api
 		{ }
 
 		/// <summary>
-		/// Gets bots from botlist
+		/// Gets bots from botlist 
 		/// </summary>
 		/// <param name="count">amount of bots to appear per page (max: 500)</param>
 		/// <param name="page">current page to query</param>
