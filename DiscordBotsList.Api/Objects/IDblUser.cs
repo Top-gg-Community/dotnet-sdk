@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DiscordBotsList.Api
 {
-    public interface IUser : IEntity
+    public interface IDblUser : IDblEntity
     {
 		string Biography { get; }
 

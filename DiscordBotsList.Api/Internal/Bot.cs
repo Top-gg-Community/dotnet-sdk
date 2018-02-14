@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DiscordBotsList.Api.Internal
 {
-    internal class Bot : Entity, IBot
+    internal class Bot : Entity, IDblBot
 	{
 		internal DiscordBotListApi api;
 
@@ -82,7 +82,7 @@ namespace DiscordBotsList.Api.Internal
 
 		public string WebsiteUrl => websiteUrl;
 
-		public async Task<IBotStats> GetStatsAsync()
+		public async Task<IDblBotStats> GetStatsAsync()
 			=> await api.GetBotStatsAsync(Id);
 	}
 }

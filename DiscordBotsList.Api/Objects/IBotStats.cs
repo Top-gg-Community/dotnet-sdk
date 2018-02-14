@@ -2,7 +2,7 @@
 
 namespace DiscordBotsList.Api
 {
-	public interface IBotStats
+	public interface IDblBotStats
 	{
 		int GuildCount { get; }
 

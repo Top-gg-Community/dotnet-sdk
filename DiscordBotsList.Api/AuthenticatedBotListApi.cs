@@ -24,7 +24,7 @@ namespace DiscordBotsList.Api
 		/// Gets your own bot with as an ISelfBot
 		/// </summary>
 		/// <returns>your own bot with as an ISelfBot</returns>
-		public async Task<ISelfBot> GetMeAsync()
+		public async Task<IDblSelfBot> GetMeAsync()
 		{
 			SelfBot bot = await GetBotAsync<SelfBot>(selfId);
 			bot.api = this;
@@ -36,8 +36,8 @@ namespace DiscordBotsList.Api
 		/// </summary>
 		/// <param name="days">Amount of days to filter</param>
 		/// <returns>A list of voters</returns>
-		public async Task<List<IEntity>> GetVotersAsync(int? days)
-			=> (await GetVotersAsync<Entity>(days)).Cast<IEntity>().ToList();
+		public async Task<List<IDblEntity>> GetVotersAsync(int? days)
+			=> (await GetVotersAsync<Entity>(days)).Cast<IDblEntity>().ToList();
 
 		/// <summary>
 		/// Gets all voter ids that have voted on your bot

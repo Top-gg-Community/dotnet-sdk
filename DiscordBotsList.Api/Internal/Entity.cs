@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DiscordBotsList.Api.Internal
 {
-    public class Entity : IEntity
+    public class Entity : IDblEntity
     {
 		public ulong Id => id;
 		public string Username => username;

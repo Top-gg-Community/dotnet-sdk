@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DiscordBotsList.Api.Internal
 {
-	internal class User : Entity, IUser
+	internal class User : Entity, IDblUser
 	{
 		[JsonProperty("bio")]
 		internal string biography;

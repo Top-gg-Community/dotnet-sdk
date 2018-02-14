@@ -17,7 +17,7 @@ namespace DiscordBotsList.Api.Internal
 		}
 	}
 
-	internal class BotStatsObject : ShardedObject, IBotStats
+	internal class BotStatsObject : ShardedObject, IDblBotStats
 	{
 		public int GuildCount => guildCount;
 

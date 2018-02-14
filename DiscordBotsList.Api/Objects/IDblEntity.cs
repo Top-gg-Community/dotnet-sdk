@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DiscordBotsList.Api
 {
-    public interface IEntity
+    public interface IDblEntity
 	{
 		/// <summary>
 		/// Discord Id

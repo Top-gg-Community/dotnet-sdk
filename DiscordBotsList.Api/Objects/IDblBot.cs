@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DiscordBotsList.Api
 {
-    public interface IBot : IEntity
+    public interface IDblBot : IDblEntity
     {
 		string LibraryUsed { get; }
 
@@ -35,12 +35,12 @@ namespace DiscordBotsList.Api
 
 		int Score { get; }
 
-		Task<IBotStats> GetStatsAsync();
+		Task<IDblBotStats> GetStatsAsync();
 	}
 
-	public interface ISelfBot : IBot
+	public interface IDblSelfBot : IDblBot
 	{
-		Task<List<IEntity>> GetVotersAsync(int? days = null);
+		Task<List<IDblEntity>> GetVotersAsync(int? days = null);
 		Task<List<ulong>> GetVoterIdsAsync(int? days = null);
 
 		Task UpdateStatsAsync(int guildCount);

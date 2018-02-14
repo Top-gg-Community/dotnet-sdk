@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace DiscordBotsList.Api.Internal
 {
-	internal class SelfBot : Bot, ISelfBot
+	internal class SelfBot : Bot, IDblSelfBot
 	{
 		public async Task<List<ulong>> GetVoterIdsAsync(int? days = null)
 			=> await (api as AuthDiscordBotListApi).GetVoterIdsAsync(days);
 
-		public async Task<List<IEntity>> GetVotersAsync(int? days = null)
+		public async Task<List<IDblEntity>> GetVotersAsync(int? days = null)
 			=> await (api as AuthDiscordBotListApi).GetVotersAsync(days);
 
 		public async Task UpdateStatsAsync(int guildCount)

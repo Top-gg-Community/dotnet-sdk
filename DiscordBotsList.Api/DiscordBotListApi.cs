@@ -21,7 +21,7 @@ namespace DiscordBotsList.Api
 		/// <param name="count">amount of bots to appear per page (max: 500)</param>
 		/// <param name="page">current page to query</param>
 		/// <returns>List of Bot Objects</returns>
-		public async Task<ISearchResult<IBot>> GetBotsAsync(int count = 50, int page = 0)
+		public async Task<ISearchResult<IDblBot>> GetBotsAsync(int count = 50, int page = 0)
 			=> await GetAsync<BotListQuery>("bots");
 
 		/// <summary>
@@ -29,7 +29,7 @@ namespace DiscordBotsList.Api
 		/// </summary>
 		/// <param name="id">Discord id</param>
 		/// <returns>Bot Object</returns>
-		public async Task<IBot> GetBotAsync(ulong id)
+		public async Task<IDblBot> GetBotAsync(ulong id)
 			=> await GetBotAsync<Bot>(id);
 
 		/// <summary>
@@ -37,7 +37,7 @@ namespace DiscordBotsList.Api
 		/// </summary>
 		/// <param name="id">Discord id</param>
 		/// <returns>IBotStats object related to the bot</returns>
-		public async Task<IBotStats> GetBotStatsAsync(ulong id)
+		public async Task<IDblBotStats> GetBotStatsAsync(ulong id)
 			=> await GetAsync<BotStatsObject>($"bots/{id}/stats");
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace DiscordBotsList.Api
 		/// </summary>
 		/// <param name="id">Discord id</param>
 		/// <returns>User Object</returns>
-		public async Task<IUser> GetUserAsync(ulong id)
+		public async Task<IDblUser> GetUserAsync(ulong id)
 			=> await GetAsync<User>($"users/{id}");
 
 		/// <summary>

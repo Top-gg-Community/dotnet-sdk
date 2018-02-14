@@ -6,10 +6,10 @@ using System.Text;
 
 namespace DiscordBotsList.Api.Internal.Queries
 {
-	internal class BotListQuery : ISearchResult<IBot>
+	internal class BotListQuery : ISearchResult<IDblBot>
 	{
-		public List<IBot> Items => results
-			.Cast<IBot>()
+		public List<IDblBot> Items => results
+			.Cast<IDblBot>()
 			.ToList();
 
 		public int CurrentPage => (int)Math.Ceiling((double)offset / limit);
