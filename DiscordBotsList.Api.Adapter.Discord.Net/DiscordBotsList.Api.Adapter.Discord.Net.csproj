@@ -1,7 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <Authors>Velddev</Authors>
+    <Company>Velddev</Company>
+    <Product>DiscordBotsList.Api.Adapter.Discord.Net</Product>
+    <Description>Adapter for Discord.Net</Description>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Copyright>Mike Veldsink</Copyright>
+    <PackageTags>discord bots list org wrapper api discord.net</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -62,12 +62,14 @@ namespace DiscordBotsList.Api
 		public async Task UpdateStats(int shardId, int shardCount, params int[] shards)
 			=> await UpdateStatsAsync(new ShardedGuildCountObject() { ShardId = shardId, ShardCount = shardCount, Shards = shards });
 
+		// TODO: probably seperate them, because it's a little redundant
 		protected async Task<List<T>> GetVotersAsync<T>(int? days)
 		{
 			string query = $"bots/{selfId}/votes";
 			List<string> args = new List<string>();
 
-			if (typeof(T).IsPrimitive)
+			// TODO: remove this for something more elegant.
+			if (typeof(T) == typeof(ulong))
 				args.Add("onlyids=true");
 
 			if (days != null)
