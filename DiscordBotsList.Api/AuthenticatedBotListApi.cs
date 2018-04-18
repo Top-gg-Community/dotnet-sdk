@@ -44,6 +44,7 @@ namespace DiscordBotsList.Api
 		/// </summary>
 		/// <param name="days">Amount of days to filter</param>
 		/// <returns>A list of snowflakes</returns>
+		[Obsolete("This endpoint has been deprecated")]
 		public async Task<List<ulong>> GetVoterIdsAsync(int? days)
 			=> await GetVotersAsync<ulong>(days);
 
