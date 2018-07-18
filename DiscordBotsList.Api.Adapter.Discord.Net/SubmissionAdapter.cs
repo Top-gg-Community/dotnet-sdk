@@ -3,8 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
+using DiscordBotsList.Api.Objects;
 
-namespace DiscordBotsList.Api.Extensions.DiscordNet
+namespace DiscordBotsList.Api.Adapter.Discord.Net
 {
 	internal class SubmissionAdapter : IAdapter
 	{

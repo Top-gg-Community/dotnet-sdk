@@ -24,7 +24,7 @@ namespace DiscordBotsList.Api
 		/// </summary>
 		/// <param name="id">Discord id</param>
 		/// <returns>Bot Object</returns>
-		public async Task<IDblBot> GetBotAsync(ulong id)
+		public async Task<IDblBot> GetBotAsync(ulong id) // <broken
 			=> await GetBotAsync<Bot>(id);
 
 		/// <summary>
