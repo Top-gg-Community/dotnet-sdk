@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace DiscordBotsList.Api
+namespace DiscordBotsList.Api.Objects
 {
     public interface IDblBot : IDblEntity
     {
@@ -41,8 +40,7 @@ namespace DiscordBotsList.Api
 	public interface IDblSelfBot : IDblBot
 	{
 		Task<List<IDblEntity>> GetVotersAsync(int? days = null);
-		Task<List<ulong>> GetVoterIdsAsync(int? days = null);
-
+	    Task<bool> HasVotedAsync(ulong userId);
 		Task UpdateStatsAsync(int guildCount);
 		Task UpdateStatsAsync(int[] shards);
 		Task UpdateStatsAsync(int shardCount, int totalShards, params int[] shards);

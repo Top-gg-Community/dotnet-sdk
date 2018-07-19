@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace DiscordBotsList.Api
+namespace DiscordBotsList.Api.Objects
 {
 	public enum WidgetType
 	{ STATUS, SERVERS, LIB, UPVOTES, OWNER }

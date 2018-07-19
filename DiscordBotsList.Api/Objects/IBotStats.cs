@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DiscordBotsList.Api
+namespace DiscordBotsList.Api.Objects
 {
 	public interface IDblBotStats
 	{

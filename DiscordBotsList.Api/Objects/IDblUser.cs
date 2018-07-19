@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DiscordBotsList.Api
+﻿namespace DiscordBotsList.Api.Objects
 {
     public interface IDblUser : IDblEntity
     {

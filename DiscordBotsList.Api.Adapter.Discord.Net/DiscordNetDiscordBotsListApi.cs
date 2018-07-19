@@ -1,9 +1,10 @@
-﻿using Discord;
-using Discord.WebSocket;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Discord;
+using Discord.WebSocket;
+using DiscordBotsList.Api.Objects;
 
-namespace DiscordBotsList.Api.Extensions.DiscordNet
+namespace DiscordBotsList.Api.Adapter.Discord.Net
 {
 	public static class DiscordNetDblUtils
 	{

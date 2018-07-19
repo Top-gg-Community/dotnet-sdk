@@ -1,10 +1,6 @@
 ﻿using Discord.WebSocket;
-using DiscordBotsList.Api.Extensions.DiscordNet;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DiscordBotsList.Api.Adapter.DiscordNet
+namespace DiscordBotsList.Api.Adapter.Discord.Net.Utils
 {
 	public static class DiscordNetDblUtils
 	{
