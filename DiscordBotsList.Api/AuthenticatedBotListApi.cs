@@ -86,10 +86,7 @@ namespace DiscordBotsList.Api
 
         protected async Task<List<T>> GetVotersAsync<T>()
         {
-            var points = GetMeAsync().Result.Points;
-            if(points > 1000)
-                throw new System.InvalidOperationException("You have more than 1000 points. You must use webhooks.");
-            var query = $"bots/{_selfId}/votes";
+             var query = $"bots/{_selfId}/votes";
             return await GetAuthorizedAsync<List<T>>(Utils.CreateQuery(query));
         }
 
