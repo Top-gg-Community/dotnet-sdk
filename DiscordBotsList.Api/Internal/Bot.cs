@@ -51,7 +51,7 @@ namespace DiscordBotsList.Api.Internal
 		internal string vanity;
 
 		[JsonProperty("points")]
-		internal int score;
+		internal int points;
 
 		public DateTime ApprovedAt => approvedAt;
 
@@ -69,7 +69,7 @@ namespace DiscordBotsList.Api.Internal
 
 		public List<ulong> OwnerIds => owners.ToList();
 
-		public int Score => score;
+		public int Points => points;
 
 		public string ShortDescription => shortDescription;
 

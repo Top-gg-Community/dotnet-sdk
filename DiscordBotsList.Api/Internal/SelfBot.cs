@@ -7,11 +7,14 @@ namespace DiscordBotsList.Api.Internal
 	internal class SelfBot : Bot, IDblSelfBot
 	{
 
-		public async Task<List<IDblEntity>> GetVotersAsync(int? days = null)
-			=> await ((AuthDiscordBotListApi) api).GetVotersAsync(days);
+		public async Task<List<IDblEntity>> GetVotersAsync()
+			=> await ((AuthDiscordBotListApi) api).GetVotersAsync();
 
 	    public async Task<bool> HasVotedAsync(ulong userId)
 	        => await ((AuthDiscordBotListApi) api).HasVoted(userId);
+
+	    public async Task<bool> IsWeekendAsync()
+	        => await ((AuthDiscordBotListApi) api).IsWeekend();
 
 		public async Task UpdateStatsAsync(int guildCount)
 			=> await ((AuthDiscordBotListApi) api).UpdateStats(guildCount);
