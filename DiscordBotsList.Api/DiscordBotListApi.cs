@@ -3,6 +3,7 @@ using DiscordBotsList.Api.Internal.Queries;
 using Miki.Rest;
 using System.Threading.Tasks;
 using DiscordBotsList.Api.Objects;
+using Newtonsoft.Json;
 
 namespace DiscordBotsList.Api
 {
@@ -71,5 +72,24 @@ namespace DiscordBotsList.Api
 			}
 			return default(T);
 		}
+
+
+	    /// <summary>
+	    /// returns true if voting multiplier = x2
+	    /// </summary>
+	    /// <returns>True or False</returns>
+	    public async Task<bool> IsWeekend()
+	    {
+	        return await IsWeekendAsync();
+	    }
+
+	    protected async Task<bool> IsWeekendAsync()
+	    {
+	        var url = "https://discordbots.org/api/weekend";
+	        var response = await RestClient.GetAsync(url);
+	        var jsonString = response.Body;
+	        var dynObj = JsonConvert.DeserializeObject<dynamic>(jsonString);
+	        return dynObj.is_weekend;
+	    }
 	}
 }

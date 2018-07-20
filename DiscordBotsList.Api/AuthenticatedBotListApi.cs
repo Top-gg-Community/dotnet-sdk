@@ -40,25 +40,6 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// returns true if user have voted for the past 12 hours
-        /// </summary>
-        /// <param name="userId">Amount of days to filter</param>
-        /// <returns>True or False</returns>
-        public async Task<bool> HasVoted(ulong userId)
-        {
-            return await HasVotedAsync(userId);
-        }
-
-        /// <summary>
-        /// returns true if voting multiplier = x2
-        /// </summary>
-        /// <returns>True or False</returns>
-        public async Task<bool> IsWeekend()
-        {
-            return await IsWeekendAsync();
-        }
-
-        /// <summary>
         /// Update your stats unsharded
         /// </summary>
         /// <param name="guildCount">count of guilds</param>
@@ -83,26 +64,20 @@ namespace DiscordBotsList.Api
             });
         }
 
+        /// <summary>
+        /// returns true if user have voted for the past 12 hours
+        /// </summary>
+        /// <param name="userId">Amount of days to filter</param>
+        /// <returns>True or False</returns>
+        public async Task<bool> HasVoted(ulong userId)
+        {
+            return await HasVotedAsync(userId);
+        }
 
         protected async Task<List<T>> GetVotersAsync<T>()
         {
              var query = $"bots/{_selfId}/votes";
             return await GetAuthorizedAsync<List<T>>(Utils.CreateQuery(query));
-        }
-
-
-        protected async Task<bool> HasVotedAsync(ulong userId)
-        {
-            var url = "https://discordbots.org/api/bots/" + $"{_selfId}/check?userId={userId}";
-            var response = await RestClient.SetAuthorization(_token).GetAsync(url);
-            return response.Body.Contains('1');
-        }
-
-        protected async Task<bool> IsWeekendAsync()
-        {
-            var url = "https://discordbots.org/api/weekend";
-            var response = await RestClient.SetAuthorization(_token).GetAsync(url);
-            return response.Body.Contains("true");
         }
 
         protected async Task UpdateStatsAsync(object statsObject)
@@ -121,6 +96,15 @@ namespace DiscordBotsList.Api
                 .GetAsync<T>(url);
             if (t.Success) return t.Data;
             return default(T);
+        }
+
+        protected async Task<bool> HasVotedAsync(ulong userId)
+        {
+            var url = "https://discordbots.org/api/bots/" + $"{_selfId}/check?userId={userId}";
+            var response = await RestClient.SetAuthorization(_token).GetAsync(url);
+            var jsonString = response.Body;
+            var dynObj = JsonConvert.DeserializeObject<dynamic>(jsonString);
+            return dynObj.voted.ToString().Equals("1");
         }
     }
 }
