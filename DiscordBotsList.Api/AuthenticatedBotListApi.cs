@@ -50,7 +50,6 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-
         /// returns true if voting multiplier = x2
         /// </summary>
         /// <returns>True or False</returns>
@@ -84,14 +83,16 @@ namespace DiscordBotsList.Api
             });
         }
 
+
         protected async Task<List<T>> GetVotersAsync<T>()
         {
             var points = GetMeAsync().Result.Points;
-            if (points > 1000)
+            if(points > 1000)
                 throw new System.InvalidOperationException("You have more than 1000 points. You must use webhooks.");
             var query = $"bots/{_selfId}/votes";
             return await GetAuthorizedAsync<List<T>>(Utils.CreateQuery(query));
         }
+
 
         protected async Task<bool> HasVotedAsync(ulong userId)
         {
@@ -99,7 +100,6 @@ namespace DiscordBotsList.Api
             var response = await RestClient.SetAuthorization(_token).GetAsync(url);
             return response.Body.Contains('1');
         }
-
 
         protected async Task<bool> IsWeekendAsync()
         {

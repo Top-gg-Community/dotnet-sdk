@@ -32,8 +32,7 @@ namespace DiscordBotsList.Api.Tests
         readonly Credentials _cred;
         readonly AuthDiscordBotListApi _api;
         private readonly AuthDiscordBotListApi _dblApi =
-
-   new AuthDiscordBotListApi(9999999999999, "DBL API TOKEN");
+            new AuthDiscordBotListApi(423593006436712458, "TOKEN");
 
 		public UnitTests()
 		{
@@ -41,17 +40,11 @@ namespace DiscordBotsList.Api.Tests
 			_api = new AuthDiscordBotListApi(_cred.BotId, _cred.Token);
 		}
 
-	    	[Fact]
+		[Fact]
         public void GetUserTest()
         {
-		       	Assert.NotNull(_dblApi.GetMeAsync());
-		      	Assert.NotNull(_dblApi.GetUserAsync(_cred.BotId));
-        }
-
-        [Fact]
-        public async Task HasVotedTestAsync()
-        {
-            Assert.False(!await _dblApi.HasVoted(181514288278536193));
+			Assert.NotNull(_dblApi.GetMeAsync());
+			Assert.NotNull(_dblApi.GetUserAsync(_cred.BotId));
         }
 
         [Fact]
@@ -74,10 +67,10 @@ namespace DiscordBotsList.Api.Tests
         }
 
         [Fact]
-	    	public async Task GetUserTestAsync()
-	    	{
-		      	Assert.NotNull(await _dblApi.GetUserAsync(181514288278536193));
-	     	}
+		public async Task GetUserTestAsync()
+		{
+			Assert.NotNull(await _dblApi.GetUserAsync(181514288278536193));
+		}
 
         [Fact]
         public async Task GetBotTestAsync()
