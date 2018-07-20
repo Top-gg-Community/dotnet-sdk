@@ -50,6 +50,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
+
         /// returns true if voting multiplier = x2
         /// </summary>
         /// <returns>True or False</returns>
@@ -83,7 +84,6 @@ namespace DiscordBotsList.Api
             });
         }
 
-
         protected async Task<List<T>> GetVotersAsync<T>()
         {
             var points = GetMeAsync().Result.Points;
@@ -93,13 +93,13 @@ namespace DiscordBotsList.Api
             return await GetAuthorizedAsync<List<T>>(Utils.CreateQuery(query));
         }
 
-
         protected async Task<bool> HasVotedAsync(ulong userId)
         {
             var url = "https://discordbots.org/api/bots/" + $"{_selfId}/check?userId={userId}";
             var response = await RestClient.SetAuthorization(_token).GetAsync(url);
             return response.Body.Contains('1');
         }
+
 
         protected async Task<bool> IsWeekendAsync()
         {

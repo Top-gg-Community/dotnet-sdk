@@ -6,7 +6,6 @@ namespace DiscordBotsList.Api.Internal
 {
 	internal class SelfBot : Bot, IDblSelfBot
 	{
-
 		public async Task<List<IDblEntity>> GetVotersAsync()
 			=> await ((AuthDiscordBotListApi) api).GetVotersAsync();
 
