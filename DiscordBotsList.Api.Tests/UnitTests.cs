@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -57,7 +58,7 @@ namespace DiscordBotsList.Api.Tests
         [Fact]
         public async Task TaskIsWeekendTestAsync()
         {
-            Assert.False(!await _dblApi.IsWeekend());
+            Assert.False(!await _dblApi.IsWeekendAsync());
         }
 
         [Fact]
@@ -84,12 +85,10 @@ namespace DiscordBotsList.Api.Tests
 			Assert.NotNull(await _dblApi.GetMeAsync());
 		}
 
-        /* Wasnt working before 
 		[Fact]
 		public async Task GetUsersGetStatsTest()
 		{
 			Assert.NotNull(await (await _dblApi.GetBotsAsync()).Items.First().GetStatsAsync());
 		}
-        */
 	}
 }

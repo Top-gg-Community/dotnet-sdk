@@ -73,23 +73,11 @@ namespace DiscordBotsList.Api
 			return default(T);
 		}
 
-
 	    /// <summary>
 	    /// returns true if voting multiplier = x2
 	    /// </summary>
 	    /// <returns>True or False</returns>
-	    public async Task<bool> IsWeekend()
-	    {
-	        return await IsWeekendAsync();
-	    }
-
-	    protected async Task<bool> IsWeekendAsync()
-	    {
-	        var url = "https://discordbots.org/api/weekend";
-	        var response = await RestClient.GetAsync(url);
-	        var jsonString = response.Body;
-	        var dynObj = JsonConvert.DeserializeObject<dynamic>(jsonString);
-	        return dynObj.is_weekend;
-	    }
+	    public async Task<bool> IsWeekendAsync()
+			=> (await RestClient.GetAsync<WeekendObject>("weekend")).Data.Weekend;
 	}
 }
