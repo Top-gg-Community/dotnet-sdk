@@ -32,15 +32,16 @@ namespace DiscordBotsList.Api.Objects
 
 		string VanityUrl { get; }
 
-		int Score { get; }
+		int Points { get; }
 
 		Task<IDblBotStats> GetStatsAsync();
 	}
 
 	public interface IDblSelfBot : IDblBot
 	{
-		Task<List<IDblEntity>> GetVotersAsync(int? days = null);
+		Task<List<IDblEntity>> GetVotersAsync();
 	    Task<bool> HasVotedAsync(ulong userId);
+	    Task<bool> IsWeekendAsync();
 		Task UpdateStatsAsync(int guildCount);
 		Task UpdateStatsAsync(int[] shards);
 		Task UpdateStatsAsync(int shardCount, int totalShards, params int[] shards);

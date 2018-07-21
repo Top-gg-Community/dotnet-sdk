@@ -19,7 +19,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        ///     Gets your own bot with as an ISelfBot
+        /// Gets your own bot with as an ISelfBot
         /// </summary>
         /// <returns>your own bot with as an ISelfBot</returns>
         public async Task<IDblSelfBot> GetMeAsync()
@@ -30,27 +30,17 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        ///     Gets all voters that have voted on your bot
+        /// Gets all voters that have voted on your bot
+        /// Max 1000, If you have more, you MUST use WEBHOOKS instead.
         /// </summary>
-        /// <param name="days">Amount of days to filter</param>
         /// <returns>A list of voters</returns>
-        public async Task<List<IDblEntity>> GetVotersAsync(int? days)
+        public async Task<List<IDblEntity>> GetVotersAsync()
         {
-            return (await GetVotersAsync<Entity>(days)).Cast<IDblEntity>().ToList();
+            return (await GetVotersAsync<Entity>()).Cast<IDblEntity>().ToList();
         }
 
         /// <summary>
-        /// returns true if user have voted for the past 24 hours
-        /// </summary>
-        /// <param name="userId">Amount of days to filter</param>
-        /// <returns>A list of voters</returns>
-        public async Task<bool> HasVoted(ulong userId)
-        {
-            return await HasVotedAsync(userId);
-        }
-
-        /// <summary>
-        ///     Update your stats unsharded
+        /// Update your stats unsharded
         /// </summary>
         /// <param name="guildCount">count of guilds</param>
         public async Task UpdateStats(int guildCount)
@@ -59,7 +49,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        ///     Update your stats sharded
+        /// Update your stats sharded
         /// </summary>
         /// <param name="shardId">Begin shard id</param>
         /// <param name="shardCount">Total shards</param>
@@ -74,28 +64,20 @@ namespace DiscordBotsList.Api
             });
         }
 
-        // TODO: probably seperate them, because it's a little redundant
-        protected async Task<List<T>> GetVotersAsync<T>(int? days)
+        /// <summary>
+        /// returns true if user have voted for the past 12 hours
+        /// </summary>
+        /// <param name="userId">Amount of days to filter</param>
+        /// <returns>True or False</returns>
+        public async Task<bool> HasVoted(ulong userId)
         {
-            var query = $"bots/{_selfId}/votes";
-            var args = new List<string>();
-
-            // TODO: remove this for something more elegant.
-            if (typeof(T) == typeof(ulong))
-                args.Add("onlyids=true");
-
-            if (days != null)
-                args.Add($"days={days}");
-
-            return await GetAuthorizedAsync<List<T>>(Utils.CreateQuery(query, args.ToArray()));
+            return await HasVotedAsync(userId);
         }
 
-
-        protected async Task<bool> HasVotedAsync(ulong userId)
+        protected async Task<List<T>> GetVotersAsync<T>()
         {
-            var url = "https://discordbots.org/api/bots/" + $"{_selfId}/check?userId={userId}";
-            var response = await RestClient.SetAuthorization(_token).GetAsync(url);
-            return response.Body.Contains('1');
+             var query = $"bots/{_selfId}/votes";
+            return await GetAuthorizedAsync<List<T>>(Utils.CreateQuery(query));
         }
 
         protected async Task UpdateStatsAsync(object statsObject)
@@ -114,6 +96,15 @@ namespace DiscordBotsList.Api
                 .GetAsync<T>(url);
             if (t.Success) return t.Data;
             return default(T);
+        }
+
+        protected async Task<bool> HasVotedAsync(ulong userId)
+        {
+            var url = "https://discordbots.org/api/bots/" + $"{_selfId}/check?userId={userId}";
+            var response = await RestClient.SetAuthorization(_token).GetAsync(url);
+            var jsonString = response.Body;
+            var dynObj = JsonConvert.DeserializeObject<dynamic>(jsonString);
+            return dynObj.voted.ToString().Equals("1");
         }
     }
 }

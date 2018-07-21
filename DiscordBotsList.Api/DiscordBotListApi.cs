@@ -3,6 +3,7 @@ using DiscordBotsList.Api.Internal.Queries;
 using Miki.Rest;
 using System.Threading.Tasks;
 using DiscordBotsList.Api.Objects;
+using Newtonsoft.Json;
 
 namespace DiscordBotsList.Api
 {
@@ -71,5 +72,12 @@ namespace DiscordBotsList.Api
 			}
 			return default(T);
 		}
+
+	    /// <summary>
+	    /// returns true if voting multiplier = x2
+	    /// </summary>
+	    /// <returns>True or False</returns>
+	    public async Task<bool> IsWeekendAsync()
+			=> (await RestClient.GetAsync<WeekendObject>("weekend")).Data.Weekend;
 	}
 }
