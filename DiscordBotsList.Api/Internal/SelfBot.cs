@@ -13,7 +13,7 @@ namespace DiscordBotsList.Api.Internal
 	        => await ((AuthDiscordBotListApi) api).HasVoted(userId);
 
 	    public async Task<bool> IsWeekendAsync()
-	        => await ((AuthDiscordBotListApi) api).IsWeekend();
+	        => await ((AuthDiscordBotListApi) api).IsWeekendAsync();
 
 		public async Task UpdateStatsAsync(int guildCount)
 			=> await ((AuthDiscordBotListApi) api).UpdateStats(guildCount);
