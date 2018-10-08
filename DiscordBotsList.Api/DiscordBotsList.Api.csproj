@@ -16,11 +16,11 @@
     <AssemblyName>DiscordBotsList.Api</AssemblyName>
     <RootNamespace>DiscordBotsList.Api</RootNamespace>
     <Product>DiscordBotsList.Api</Product>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Miki.Rest" Version="1.5.1" />
+    <PackageReference Include="Miki.Net.Http" Version="2.0.0" />
   </ItemGroup>
 
 </Project>

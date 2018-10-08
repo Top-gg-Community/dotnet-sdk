@@ -13,9 +13,12 @@ namespace DiscordBotsList.Api
         private readonly string _token;
 
         public AuthDiscordBotListApi(ulong selfId, string token)
+			: base()
         {
             _selfId = selfId;
             _token = token;
+
+			_httpClient.SetAuthorization(_token);
         }
 
         /// <summary>
@@ -84,15 +87,13 @@ namespace DiscordBotsList.Api
         {
             var json = JsonConvert.SerializeObject(statsObject);
 
-            await RestClient
-                .SetAuthorization(_token)
+            await _httpClient
                 .PostAsync($"bots/{_selfId}/stats", json);
         }
 
         protected async Task<T> GetAuthorizedAsync<T>(string url)
         {
-            var t = await RestClient
-                .SetAuthorization(_token)
+            var t = await _httpClient
                 .GetAsync<T>(url);
             if (t.Success) return t.Data;
             return default(T);
@@ -101,7 +102,7 @@ namespace DiscordBotsList.Api
         protected async Task<bool> HasVotedAsync(ulong userId)
         {
             var url = "https://discordbots.org/api/bots/" + $"{_selfId}/check?userId={userId}";
-            var response = await RestClient.SetAuthorization(_token).GetAsync(url);
+            var response = await _httpClient.GetAsync(url);
             var jsonString = response.Body;
             var dynObj = JsonConvert.DeserializeObject<dynamic>(jsonString);
             return dynObj.voted.ToString().Equals("1");

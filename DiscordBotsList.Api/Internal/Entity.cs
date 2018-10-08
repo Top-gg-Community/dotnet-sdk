@@ -3,7 +3,7 @@ using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {
-    public class Entity : IDblEntity
+    internal class Entity : IDblEntity
     {
 		public ulong Id => id;
 		public string Username => username;
