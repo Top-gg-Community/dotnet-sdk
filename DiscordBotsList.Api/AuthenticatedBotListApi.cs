@@ -68,6 +68,20 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
+        /// Update your stats sharded
+        /// </summary>
+        /// <param name="guildCount">count of guilds</param>
+        /// <param name="shardCount">Total shards</param>
+        public async Task UpdateStats(int guildCount, int shardCount)
+        {
+            await UpdateStatsAsync(new ShardedGuildCountObject
+            {
+                ShardCount = shardCount,
+                GuildCount = guildCount
+            });
+        }
+
+        /// <summary>
         /// returns true if user have voted for the past 12 hours
         /// </summary>
         /// <param name="userId">Amount of days to filter</param>
