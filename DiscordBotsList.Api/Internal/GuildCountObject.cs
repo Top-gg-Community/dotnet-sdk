@@ -47,5 +47,8 @@ namespace DiscordBotsList.Api.Internal
 
 		[JsonProperty("shard_count")]
 		public int ShardCount;
+
+		[JsonProperty("server_count")]
+		public int GuildCount;
 	}
 }
