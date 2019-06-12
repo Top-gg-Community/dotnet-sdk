@@ -1,20 +1,20 @@
 ﻿using DiscordBotsList.Api.Internal;
 using DiscordBotsList.Api.Internal.Queries;
-using Miki.Rest;
 using System.Threading.Tasks;
 using DiscordBotsList.Api.Objects;
+using System.Net.Http;
 using Newtonsoft.Json;
-using Miki.Net.Http;
 
 namespace DiscordBotsList.Api
 {
 	public class DiscordBotListApi
 	{
 		protected HttpClient _httpClient;
+        protected const string baseEndpoint = "https://discordbots.org/api/";
 
 		public DiscordBotListApi()
 		{
-			_httpClient = new HttpClient("https://discordbots.org/api/");
+            _httpClient = new HttpClient();
 		}
 
 		/// <summary>
@@ -80,12 +80,10 @@ namespace DiscordBotsList.Api
 		/// <returns>Object of type T</returns>
 		protected async Task<T> GetAsync<T>(string url)
 		{
-			HttpResponse<T> t = await _httpClient.GetAsync<T>(url);
-			if (t.Success)
-			{
-				return t.Data;
-			}
-			return default(T);
+			HttpResponseMessage t = await _httpClient.GetAsync(baseEndpoint + url);
+            if (t.IsSuccessStatusCode)
+				return JsonConvert.DeserializeObject<T>(await t.Content.ReadAsStringAsync());
+			return default;
 		}
 
 	    /// <summary>
@@ -93,6 +91,6 @@ namespace DiscordBotsList.Api
 	    /// </summary>
 	    /// <returns>True or False</returns>
 	    public async Task<bool> IsWeekendAsync()
-			=> (await _httpClient.GetAsync<WeekendObject>("weekend")).Data.Weekend;
+			=> (await GetAsync<WeekendObject>("weekend")).Weekend;
 	}
 }

@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using DiscordBotsList.Api.Internal;
 using DiscordBotsList.Api.Objects;
@@ -18,7 +21,7 @@ namespace DiscordBotsList.Api
             _selfId = selfId;
             _token = token;
 
-			_httpClient.SetAuthorization(_token);
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
         /// <summary>
@@ -100,26 +103,20 @@ namespace DiscordBotsList.Api
         protected async Task UpdateStatsAsync(object statsObject)
         {
             var json = JsonConvert.SerializeObject(statsObject);
-
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             await _httpClient
-                .PostAsync($"bots/{_selfId}/stats", json);
+                .PostAsync($"{baseEndpoint}/bots/{_selfId}/stats", httpContent);
         }
 
         protected async Task<T> GetAuthorizedAsync<T>(string url)
         {
-            var t = await _httpClient
-                .GetAsync<T>(url);
-            if (t.Success) return t.Data;
-            return default(T);
+            return await GetAsync<T>(url);
         }
 
         protected async Task<bool> HasVotedAsync(ulong userId)
         {
-            var url = "https://discordbots.org/api/bots/" + $"{_selfId}/check?userId={userId}";
-            var response = await _httpClient.GetAsync(url);
-            var jsonString = response.Body;
-            var dynObj = JsonConvert.DeserializeObject<dynamic>(jsonString);
-            return dynObj.voted.ToString().Equals("1");
+            var url = $"bots/{_selfId}/check?userId={userId}";
+            return (await GetAsync<dynamic>(url)).voted.ToString().Equals("1");
         }
     }
 }
