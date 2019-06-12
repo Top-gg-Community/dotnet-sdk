@@ -105,7 +105,7 @@ namespace DiscordBotsList.Api
             var json = JsonConvert.SerializeObject(statsObject);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             await _httpClient
-                .PostAsync($"https://discordbots.org/api/bots/{_selfId}/stats", httpContent);
+                .PostAsync($"{baseEndpoint}/bots/{_selfId}/stats", httpContent);
         }
 
         protected async Task<T> GetAuthorizedAsync<T>(string url)
@@ -115,7 +115,7 @@ namespace DiscordBotsList.Api
 
         protected async Task<bool> HasVotedAsync(ulong userId)
         {
-            var url = "bots/" + $"{_selfId}/check?userId={userId}";
+            var url = $"bots/{_selfId}/check?userId={userId}";
             return (await GetAsync<dynamic>(url)).voted.ToString().Equals("1");
         }
     }

@@ -10,6 +10,7 @@ namespace DiscordBotsList.Api
 	public class DiscordBotListApi
 	{
 		protected HttpClient _httpClient;
+        protected const string baseEndpoint = "https://discordbots.org/api/";
 
 		public DiscordBotListApi()
 		{
@@ -79,7 +80,7 @@ namespace DiscordBotsList.Api
 		/// <returns>Object of type T</returns>
 		protected async Task<T> GetAsync<T>(string url)
 		{
-			HttpResponseMessage t = await _httpClient.GetAsync("https://discordbots.org/api/" + url);
+			HttpResponseMessage t = await _httpClient.GetAsync(baseEndpoint + url);
             if (t.IsSuccessStatusCode)
 				return JsonConvert.DeserializeObject<T>(await t.Content.ReadAsStringAsync());
 			return default;
