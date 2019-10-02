@@ -53,7 +53,7 @@ namespace DiscordBotsList.Api.Objects
 		/// <returns>Widget url</returns>
 		public string Build(ulong botId)
 		{
-			string query = $"https://discordbots.org/api/widget/{ Type.ToString().ToLower() }/{ botId }.svg";
+			string query = $"https://top.gg/api/widget/{ Type.ToString().ToLower() }/{ botId }.svg";
 
 			List<string> args = new List<string>();
 
@@ -128,7 +128,7 @@ namespace DiscordBotsList.Api.Objects
 		/// <returns>Widget url</returns>
 		public string Build(ulong botId)
 		{
-			string query = $"https://discordbots.org/api/widget/{ botId }.svg";
+			string query = $"https://top.gg/api/widget/{ botId }.svg";
 
 			List<string> args = new List<string>();
 

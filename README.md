@@ -1,5 +1,5 @@
 # DBL-dotnet-Library
-Discordbots.org botlist wrapper
+top.gg botlist wrapper
 
 ## Usage
 ### Unauthorized api usage
@@ -44,7 +44,7 @@ string widgetUrl = new SmallWidgetOptions()
 	.Build(160105994217586689);
 ```
 
-Generates ![](https://discordbots.org/api/widget/status/160105994217586689.svg?leftcolor=FFFFFF)
+Generates ![](https://top.gg/api/widget/status/160105994217586689.svg?leftcolor=FFFFFF)
 
 ### Download
 #### Nuget

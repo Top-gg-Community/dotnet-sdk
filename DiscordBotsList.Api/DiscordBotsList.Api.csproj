@@ -4,7 +4,7 @@
     <TargetFramework>netstandard1.6</TargetFramework>
     <Authors>Velddev</Authors>
     <Company>Velddev</Company>
-    <Description>Discordbots.org api wrapper</Description>
+    <Description>top.gg api wrapper</Description>
     <Copyright>Mike Veldsink</Copyright>
     <PackageProjectUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</PackageProjectUrl>
     <RepositoryUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</RepositoryUrl>
