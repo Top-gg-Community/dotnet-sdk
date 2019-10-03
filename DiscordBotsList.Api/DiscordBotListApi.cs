@@ -10,7 +10,7 @@ namespace DiscordBotsList.Api
 	public class DiscordBotListApi
 	{
 		protected HttpClient _httpClient;
-        protected const string baseEndpoint = "https://discordbots.org/api/";
+        protected const string baseEndpoint = "https://top.gg/api/";
 
 		public DiscordBotListApi()
 		{

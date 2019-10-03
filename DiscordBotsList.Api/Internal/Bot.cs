@@ -78,7 +78,7 @@ namespace DiscordBotsList.Api.Internal
 		public string SupportUrl => "https://discord.gg/" + supportUrl;
 
 		public string VanityTag => vanity;
-		public string VanityUrl => "https://discordbots.org/bots/" + vanity;
+		public string VanityUrl => "https://top.gg/bots/" + vanity;
 
 		public string WebsiteUrl => websiteUrl;
 
