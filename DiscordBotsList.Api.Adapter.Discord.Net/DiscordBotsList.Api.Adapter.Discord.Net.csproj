@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
@@ -13,15 +13,23 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</RepositoryUrl>
     <PackageProjectUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</PackageProjectUrl>
-    <Version>1.1.0</Version>
+    <Version>1.4.0</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Discord.Net" Version="2.0.0-beta" />
+    <PackageReference Include="Discord.Net" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DiscordBotsList.Api\DiscordBotsList.Api.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

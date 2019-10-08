@@ -17,10 +17,18 @@
     <RootNamespace>DiscordBotsList.Api</RootNamespace>
     <Product>DiscordBotsList.Api</Product>
     <Version>1.4.0</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
