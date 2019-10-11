@@ -1,5 +1,5 @@
-# DBL-dotnet-Library
-top.gg botlist wrapper
+# Top.Net
+An API wrapper for top.gg (previously discordbotlist.org).
 
 ## Usage
 ### Unauthorized api usage
