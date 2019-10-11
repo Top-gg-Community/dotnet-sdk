@@ -1,4 +1,4 @@
-# Top.Net
+# DiscordBotList.Api
 An API wrapper for top.gg (previously discordbotlist.org).
 
 ## Usage
