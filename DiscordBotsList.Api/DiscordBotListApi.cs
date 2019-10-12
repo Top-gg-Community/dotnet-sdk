@@ -10,11 +10,11 @@ namespace DiscordBotsList.Api
 	public class DiscordBotListApi
 	{
 		protected HttpClient _httpClient;
-        protected const string baseEndpoint = "https://top.gg/api/";
+        	protected const string baseEndpoint = "https://top.gg/api/";
 
 		public DiscordBotListApi()
 		{
-            _httpClient = new HttpClient();
+			_httpClient = new HttpClient();
 		}
 
 		/// <summary>
@@ -28,9 +28,7 @@ namespace DiscordBotsList.Api
 			var result = await GetAsync<BotListQuery>("bots");
 
 			foreach(var bot in result.Items)
-			{
 				(bot as Bot).api = this;
-			}
 
 			return result;
 		}
@@ -81,9 +79,17 @@ namespace DiscordBotsList.Api
 		protected async Task<T> GetAsync<T>(string url)
 		{
 			HttpResponseMessage t = await _httpClient.GetAsync(baseEndpoint + url);
-            if (t.IsSuccessStatusCode)
-				return JsonConvert.DeserializeObject<T>(await t.Content.ReadAsStringAsync());
-			return default;
+			ApiResult<T> result;
+			try
+			{
+				result = t.IsSuccessStatusCode ? ApiResult<T>.FromSuccess(DeserializeObject<T>(await t.Content.ReadAsStringAsync())
+				 : ApiResult<T>.FromHttpError(t.StatusCode);
+			}
+			catch (Exception ex)
+			{
+				result = ApiResult<T>.FromError(ex);
+			}
+			return result.Value;
 		}
 
 	    /// <summary>
@@ -92,5 +98,28 @@ namespace DiscordBotsList.Api
 	    /// <returns>True or False</returns>
 	    public async Task<bool> IsWeekendAsync()
 			=> (await GetAsync<WeekendObject>("weekend")).Weekend;
+	}
+	
+	public class ApiResult<T>
+	{
+		private ApiResult() {}
+		
+		internal static ApiResult<T> FromSuccess(T value)
+			=> new ApiResult<T> { Value = value, IsSuccess = true };
+		
+		internal static ApiResult<T> FromError(Exception ex)
+			=> new ApiResult<T> { Value = default, ErrorReason = ex.Message, IsSuccess = false };
+		
+		internal static ApiResult<T> FromHttpError(HttpStatusCode statusCode) // This could be altered to collect an object that provides more information
+			=> new ApiResult<T> { Value = default, ErrorReason = code.ToString(), IsSuccess = false } ;
+		
+		public T Value { get; private set; }
+		
+		/// <summary>
+		/// The error reason for this API request, if any.
+		/// </summary>
+		public string ErrorReason { get; private set; }
+		
+		public bool IsSuccess { get; private set; }
 	}
 }
