@@ -10,11 +10,11 @@ namespace DiscordBotsList.Api
 	public class DiscordBotListApi
 	{
 		protected HttpClient _httpClient;
-        protected const string baseEndpoint = "https://top.gg/api/";
+        	protected const string baseEndpoint = "https://top.gg/api/";
 
 		public DiscordBotListApi()
 		{
-            _httpClient = new HttpClient();
+			_httpClient = new HttpClient();
 		}
 
 		/// <summary>
@@ -28,9 +28,7 @@ namespace DiscordBotsList.Api
 			var result = await GetAsync<BotListQuery>("bots");
 
 			foreach(var bot in result.Items)
-			{
 				(bot as Bot).api = this;
-			}
 
 			return result;
 		}
@@ -81,9 +79,17 @@ namespace DiscordBotsList.Api
 		protected async Task<T> GetAsync<T>(string url)
 		{
 			HttpResponseMessage t = await _httpClient.GetAsync(baseEndpoint + url);
-            if (t.IsSuccessStatusCode)
-				return JsonConvert.DeserializeObject<T>(await t.Content.ReadAsStringAsync());
-			return default;
+			ApiResult<T> result;
+			try
+			{
+				result = t.IsSuccessStatusCode ? ApiResult<T>.FromSuccess(DeserializeObject<T>(await t.Content.ReadAsStringAsync())
+				 : ApiResult<T>.FromHttpError(t.StatusCode);
+			}
+			catch (Exception ex)
+			{
+				result = ApiResult<T>.FromError(ex);
+			}
+			return result.Value;
 		}
 
 	    /// <summary>
