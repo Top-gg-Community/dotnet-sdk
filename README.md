@@ -28,7 +28,7 @@ AuthDiscordBotListApi DblApi = new AuthDiscordBotListApi(BOT_DISCORD_ID, YOUR_TO
 
 #### Updating stats
 ```cs
-ISelfBot me = await DblApi.GetMeAsync();
+IDblSelfBot me = await DblApi.GetMeAsync();
 // Update stats sharded   indexShard shardCount shards
 await me.UpdateStatsAsync(24,        50,        new[] { 12, 421, 62, 241, 524, 534 });
 
