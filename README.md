@@ -9,18 +9,18 @@ If you don't have an API token, you can only initialize an unauthenticated API c
 ### Setting up the API client
 Initializing a new API client that is unauthorized is simple.
 ```cs
-DiscordBotListApi dblApi = new DiscordBotListApi();
+BaseDblClient dblClient = new BaseDblClient();
 ```
 
 ### Searching
 Using the API client, you can now search for a specific bot by specifying its Discord ID.
 ```cs
-IDblBot bot = await dblApi.GetBotAsync(160105994217586689);
+IDblBot bot = await dblClient.GetBotAsync(160105994217586689);
 ```
 
 Likewise, you can also search for users by specifying their Discord ID.
 ```cs
-IDblUser bot = await dblApi.GetUserAsync(121919449996460033);
+IDblUser bot = await dblClient.GetUserAsync(121919449996460033);
 ```
 
 ## Authorized Usage
@@ -28,24 +28,24 @@ If you have an API key from top.gg, you may initialize an authenticated API clie
 
 ### Setting up the API client
 ```cs
-AuthDiscordBotListApi dblApi = new AuthDiscordBotListApi(BOT_DISCORD_ID, API_TOKEN);
+DblClient dblClient = new DblClient(BOT_DISCORD_ID, API_TOKEN);
 ```
 
 ### Updating stats
 You can get the instance of your bot for the API as so:
 ```cs
-IDblSelfBot me = await dblApi.GetMeAsync();
+IDblSelfBot self = await dblClient.GetSelfAsync();
 ```
 
 If you are currently running a bot that does not utilize shards, you can simply specify the guild count.
 ```cs
-await me.UpdateStatsAsync(2133);
+await self.UpdateStatsAsync(2133);
 ```
 
 Otherwise, if you are running a bot that utilizes shards, the way you update your stats is approached a little bit differently.
 When updating stats, you would have to specify the index at which you are beginning to update your shards, the current shard count your bot has, and an array containing the individual guild counts for each shard starting at the index.
 ```cs
-await me.UpdateStatsAsync(24, 50, new[] { 12, 421, 62, 241, 524, 534 });
+await self.UpdateStatsAsync(24, 50, new[] { 12, 421, 62, 241, 524, 534 });
 ```
 
 In this example, this bot has 50 shards. I want to update the shards starting at shard 24, and proceed from there. In this case, shard 24 now has 12 guilds, shard 25 has 421 guilds, shard 26 has 62 guilds, and so forth.
