@@ -15,7 +15,7 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 			=> new ShardedDiscordNetDblApi(client, dblToken);
 	}
 
-    public class DiscordNetDblApi : AuthDiscordBotListApi
+    public class DiscordNetDblApi : DblClient
     {
 		protected IDiscordClient client;
 

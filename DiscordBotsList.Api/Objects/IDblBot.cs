@@ -4,14 +4,23 @@ using System.Threading.Tasks;
 
 namespace DiscordBotsList.Api.Objects
 {
-    public interface IDblBot : IDblEntity
+	/// <summary>
+	/// Represents a generic bot for the Discord Bot List API.
+	/// </summary>
+	public interface IDblBot : IDblEntity
     {
 		string LibraryUsed { get; }
 
 		string PrefixUsed { get; }
 
+		/// <summary>
+		/// Represents the short description used for this bot (up to 140 characters).
+		/// </summary>
 		string ShortDescription { get; }
 
+		/// <summary>
+		/// Represents the full description used for this bot.
+		/// </summary>
 		string LongDescription { get; }
 
 		List<string> Tags { get; }
@@ -26,6 +35,9 @@ namespace DiscordBotsList.Api.Objects
 
 		string InviteUrl { get; }
 
+		/// <summary>
+		/// Represents the <see cref="DateTime"/> at which this bot was approved.
+		/// </summary>
 		DateTime ApprovedAt { get; }
 
 		bool IsCertified { get; }
@@ -34,16 +46,10 @@ namespace DiscordBotsList.Api.Objects
 
 		int Points { get; }
 
+		/// <summary>
+		/// Returns the stats of this bot. If no results were found, this returns null.
+		/// </summary>
+		/// <returns>An object that represents the stats for this bot.</returns>
 		Task<IDblBotStats> GetStatsAsync();
-	}
-
-	public interface IDblSelfBot : IDblBot
-	{
-		Task<List<IDblEntity>> GetVotersAsync();
-	    Task<bool> HasVotedAsync(ulong userId);
-	    Task<bool> IsWeekendAsync();
-		Task UpdateStatsAsync(int guildCount);
-		Task UpdateStatsAsync(int[] shards);
-		Task UpdateStatsAsync(int shardCount, int totalShards, params int[] shards);
 	}
 }

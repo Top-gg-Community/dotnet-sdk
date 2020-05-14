@@ -9,7 +9,7 @@ namespace DiscordBotsList.Api.Internal
 {
     internal class Bot : Entity, IDblBot
 	{
-		internal DiscordBotListApi api;
+		internal BaseDblClient api;
 
 		[JsonProperty("lib")]
 		internal string library;

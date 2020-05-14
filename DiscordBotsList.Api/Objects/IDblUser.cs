@@ -1,6 +1,6 @@
 ﻿namespace DiscordBotsList.Api.Objects
 {
-    public interface IDblUser : IDblEntity
+	public interface IDblUser : IDblEntity
     {
 		string Biography { get; }
 

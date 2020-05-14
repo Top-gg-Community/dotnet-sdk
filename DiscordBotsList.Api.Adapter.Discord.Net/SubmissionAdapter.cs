@@ -9,13 +9,13 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 {
 	internal class SubmissionAdapter : IAdapter
 	{
-		protected AuthDiscordBotListApi api;
+		protected DblClient api;
 		protected IDiscordClient client;
 		protected TimeSpan updateTime;
 
 		protected DateTime lastTimeUpdated;
 
-		public SubmissionAdapter(AuthDiscordBotListApi api, IDiscordClient client, TimeSpan updateTime)
+		public SubmissionAdapter(DblClient api, IDiscordClient client, TimeSpan updateTime)
 		{
 			this.client = client;
 			this.updateTime = updateTime;
@@ -27,7 +27,7 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 		{
 			if(DateTime.Now > lastTimeUpdated + updateTime)
 			{
-				await api.UpdateStats(
+				await api.UpdateStatsAsync(
 					(await client.GetGuildsAsync()).Count
 				);
 
@@ -52,7 +52,7 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 
 	internal class ShardedSubmissionAdapter : SubmissionAdapter, IAdapter
 	{
-		public ShardedSubmissionAdapter(AuthDiscordBotListApi api, DiscordShardedClient client, TimeSpan updateTime)
+		public ShardedSubmissionAdapter(DblClient api, DiscordShardedClient client, TimeSpan updateTime)
 			: base(api, client, updateTime)
 		{ }
 
@@ -60,7 +60,7 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 		{
 			if (DateTime.Now > lastTimeUpdated + updateTime)
 			{
-				await api.UpdateStats(
+				await api.UpdateStatsAsync(
 					0, 
 					(client as DiscordShardedClient).Shards.Count, 
 					(client as DiscordShardedClient).Shards.Select(x => x.Guilds.Count).ToArray()

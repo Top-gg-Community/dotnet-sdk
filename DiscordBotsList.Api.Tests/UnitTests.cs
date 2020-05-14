@@ -31,25 +31,25 @@ namespace DiscordBotsList.Api.Tests
     public class UnitTests
     {
         readonly Credentials _cred;
-        readonly AuthDiscordBotListApi _api;
+        readonly DblClient _api;
 
 		public UnitTests()
 		{
 			_cred = Credentials.LoadFromFile("./settings.json");
-			_api = new AuthDiscordBotListApi(_cred.BotId, _cred.Token);
+			_api = new DblClient(_cred.BotId, _cred.Token);
 		}
 
 		[Fact]
         public void GetUserTest()
         {
-			Assert.NotNull(_api.GetMeAsync());
+			Assert.NotNull(_api.GetSelfAsync());
 			Assert.NotNull(_api.GetUserAsync(_cred.BotId));
         }
 
         [Fact]
         public async Task HasVotedTestAsync()
         {
-            Assert.False(await _api.HasVoted(0));
+            Assert.False(await _api.HasVotedAsync(0));
         }
 
         
@@ -80,7 +80,7 @@ namespace DiscordBotsList.Api.Tests
 		[Fact]
 		public async Task GetMeTestAsync()
 		{
-			Assert.NotNull(await _api.GetMeAsync());
+			Assert.NotNull(await _api.GetSelfAsync());
 		}
 
 		[Fact]
