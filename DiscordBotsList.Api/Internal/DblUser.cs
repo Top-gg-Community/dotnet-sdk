@@ -3,7 +3,7 @@ using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {
-	internal class User : Entity, IDblUser
+	internal class DblUser : DblEntity, IDblUser
 	{
 		[JsonProperty("bio")]
 		internal string biography;

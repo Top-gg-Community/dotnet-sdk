@@ -35,8 +35,8 @@ namespace DiscordBotsList.Api
         /// <returns>The object of a bot that the <see cref="DblClient"/> is bound to.</returns>
         public async Task<IDblSelfBot> GetSelfAsync()
         {
-            var bot = await GetBotAsync<SelfBot>(_id);
-            bot.api = this;
+            var bot = await GetBotAsync<DblSelfBot>(_id);
+            bot.Client = this;
             return bot;
         }
 
@@ -46,7 +46,7 @@ namespace DiscordBotsList.Api
         /// <returns>A list of all users that have voted.</returns>
         public async Task<List<IDblEntity>> GetVotersAsync()
         {
-            return (await GetVotersAsync<Entity>()).Cast<IDblEntity>().ToList();
+            return (await GetVotersAsync<DblEntity>()).Cast<IDblEntity>().ToList();
         }
 
         /// <summary>

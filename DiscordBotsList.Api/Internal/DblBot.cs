@@ -7,9 +7,9 @@ using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {
-    internal class Bot : Entity, IDblBot
+    internal class DblBot : DblEntity, IDblBot
 	{
-		internal BaseDblClient api;
+		internal BaseDblClient Client;
 
 		[JsonProperty("lib")]
 		internal string library;
@@ -83,6 +83,6 @@ namespace DiscordBotsList.Api.Internal
 		public string WebsiteUrl => websiteUrl;
 
 		public async Task<IDblBotStats> GetStatsAsync()
-			=> await api.GetBotStatsAsync(Id);
+			=> await Client.GetBotStatsAsync(Id);
 	}
 }

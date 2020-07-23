@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace DiscordBotsList.Api
 {
+	// https://top.gg/api/docs#bots
 	/// <summary>
 	/// Represents the base of a Discord Bot List API client.
 	/// </summary>
@@ -30,11 +31,11 @@ namespace DiscordBotsList.Api
 		{
 			count = count > 500 ? 500 : count;
 
-			var result = await GetAsync<BotListQuery>("bots");
+			var result = await GetAsync<BotSearchQuery>("bots");
 
 			foreach(IDblBot bot in result.Items)
 			{
-				(bot as Bot).api = this;
+				(bot as DblBot).Client = this;
 			}
 
 			return result;
@@ -46,7 +47,7 @@ namespace DiscordBotsList.Api
 		/// <param name="id">Represents the ID of the bot you wish to retrieve.</param>
 		/// <returns>A generic object representing a bot.</returns>
 		public async Task<IDblBot> GetBotAsync(ulong id)
-			=> await GetBotAsync<Bot>(id);
+			=> await GetBotAsync<DblBot>(id);
 
 		/// <summary>
 		/// Returns the stats of a bot specified by its ID. If no results were found, this returns null.
@@ -62,7 +63,7 @@ namespace DiscordBotsList.Api
 		/// <param name="id">Represents the ID of the user you wish to retrieve.</param>
 		/// <returns>A generic object representing a user.</returns>
 		public async Task<IDblUser> GetUserAsync(ulong id)
-			=> await GetAsync<User>($"users/{id}");
+			=> await GetAsync<DblUser>($"users/{id}");
 
 		/// <summary>
 		/// Returns the instance of a bot by its ID.
@@ -71,10 +72,10 @@ namespace DiscordBotsList.Api
 		/// <param name="id">Represents the ID of the bot that you wish to retrieve.</param>
 		/// <returns>An object representing a bot.</returns>
 		internal async Task<T> GetBotAsync<T>(ulong id)
-			where T : Bot
+			where T : DblBot
 		{
 			T t = await GetAsync<T>($"bots/{id}");
-			t.api = this;
+			t.Client = this;
 			return t;
 		}
 

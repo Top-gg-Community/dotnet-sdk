@@ -4,24 +4,24 @@ using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {
-	internal class SelfBot : Bot, IDblSelfBot
+	internal class DblSelfBot : DblBot, IDblSelfBot
 	{
 		public async Task<List<IDblEntity>> GetVotersAsync()
-			=> await ((DblClient) api).GetVotersAsync();
+			=> await ((DblClient) Client).GetVotersAsync();
 
 	    public async Task<bool> HasVotedAsync(ulong userId)
-	        => await ((DblClient) api).HasVotedAsync(userId);
+	        => await ((DblClient) Client).HasVotedAsync(userId);
 
 	    public async Task<bool> IsWeekendAsync()
-	        => await ((DblClient) api).IsWeekendAsync();
+	        => await ((DblClient) Client).IsWeekendAsync();
 
 		public async Task UpdateStatsAsync(int guildCount)
-			=> await ((DblClient) api).UpdateStatsAsync(guildCount);
+			=> await ((DblClient) Client).UpdateStatsAsync(guildCount);
 
 		public async Task UpdateStatsAsync(int[] shards)
-			=> await ((DblClient) api).UpdateStatsAsync(0, shards.Length, shards);
+			=> await ((DblClient) Client).UpdateStatsAsync(0, shards.Length, shards);
 
 		public async Task UpdateStatsAsync(int shardCount, int totalShards, params int[] shards)
-			=> await ((DblClient) api).UpdateStatsAsync(shardCount, totalShards, shards);
+			=> await ((DblClient) Client).UpdateStatsAsync(shardCount, totalShards, shards);
 	}
 }

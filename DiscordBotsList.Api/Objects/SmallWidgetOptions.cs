@@ -50,8 +50,14 @@ namespace DiscordBotsList.Api.Objects
 			return this;
 		}
 
+		public SmallWidgetOptions SetUseAvatar(bool useAvatar)
+		{
+			UseAvatar = useAvatar;
+			return this;
+		}
+
 		/// <summary>
-		/// Builds and returns a value.
+		/// Returns the URL that links the small widget.
 		/// </summary>
 		/// <param name="botId">Id of the bot</param>
 		/// <returns>Widget url</returns>
@@ -60,6 +66,9 @@ namespace DiscordBotsList.Api.Objects
 			string query = $"https://top.gg/api/widget/{ Type.ToString().ToLower() }/{ botId }.svg";
 
 			List<string> args = new List<string>();
+
+			if (!UseAvatar.GetValueOrDefault(true))
+				args.Add($"noavatar=true");
 
 			if (AvatarBackgroundColor != null)
 				args.Add($"avatarbg={AvatarBackgroundColor.Value.ToString("X")}");

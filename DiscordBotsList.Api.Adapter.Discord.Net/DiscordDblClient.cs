@@ -8,18 +8,18 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 {
 	public static class DiscordNetDblUtils
 	{
-		public static DiscordNetDblApi CreateDblApi(this DiscordSocketClient client, string dblToken)
-			=> new DiscordNetDblApi(client, dblToken);
+		public static DiscordDblClient CreateDblApi(this DiscordSocketClient client, string dblToken)
+			=> new DiscordDblClient(client, dblToken);
 
-		public static ShardedDiscordNetDblApi CreateDblApi(this DiscordShardedClient client, string dblToken)
-			=> new ShardedDiscordNetDblApi(client, dblToken);
+		public static DiscordShardedDblClient CreateDblApi(this DiscordShardedClient client, string dblToken)
+			=> new DiscordShardedDblClient(client, dblToken);
 	}
 
-    public class DiscordNetDblApi : DblClient
+    public class DiscordDblClient : DblClient
     {
 		protected IDiscordClient client;
 
-		public DiscordNetDblApi(IDiscordClient client, string dblToken) : base(client.CurrentUser.Id, dblToken)
+		public DiscordDblClient(IDiscordClient client, string dblToken) : base(client.CurrentUser.Id, dblToken)
 		{
 			this.client = client;
 		}
@@ -41,9 +41,9 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 			=> new SubmissionAdapter(this, client, updateTime ?? TimeSpan.Zero);
 	}
 
-	public class ShardedDiscordNetDblApi : DiscordNetDblApi
+	public class DiscordShardedDblClient : DiscordDblClient
 	{
-		public ShardedDiscordNetDblApi(DiscordShardedClient client, string dblToken) : base(client, dblToken)
+		public DiscordShardedDblClient(DiscordShardedClient client, string dblToken) : base(client, dblToken)
 		{ }
 
 		/// <summary>

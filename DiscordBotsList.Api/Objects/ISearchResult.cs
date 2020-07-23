@@ -7,7 +7,7 @@ namespace DiscordBotsList.Api.Objects
 		/// <summary>
 		/// Items returned from search
 		/// </summary>
-		List<T> Items { get; }
+		IEnumerable<T> Items { get; }
 
 		/// <summary>
 		/// The current page you've navigated
@@ -22,11 +22,11 @@ namespace DiscordBotsList.Api.Objects
 		/// <summary>
 		/// Total amount of items found in the search
 		/// </summary>
-		int TotalItems { get; }
+		int ItemCount { get; }
 
 		/// <summary>
 		/// Total amount of pages found in the search
 		/// </summary>
-		int TotalPages { get; }
+		int PageCount { get; }
 	}
 }
