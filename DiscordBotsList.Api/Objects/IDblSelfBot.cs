@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace DiscordBotsList.Api.Objects
 {
 	/// <summary>
-	/// Represents a generic self bot for the Discord Bot List API.
+	/// Represents a generic client bot for the Discord Bot List API.
 	/// </summary>
     public interface IDblSelfBot : IDblBot
 	{

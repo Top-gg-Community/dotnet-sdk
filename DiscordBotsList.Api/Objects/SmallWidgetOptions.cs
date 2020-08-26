@@ -1,16 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using DiscordBotsList.Api.Internal;
 
 namespace DiscordBotsList.Api.Objects
 {
 	public class SmallWidgetOptions
 	{
-		SmallWidgetType Type;
-		bool? UseAvatar;
-		int? AvatarBackgroundColor;
-		int? LeftColor;
-		int? RightColor;
-		int? LeftTextColor;
-		int? RightTextColor;
+		public SmallWidgetType Type { get; set; }
+
+        public WidgetImageFormat Format { get; set; } = WidgetImageFormat.Svg;
+
+        [QueryParam(toLower: true)]
+		public bool? UseAvatar;
+
+        [QueryParam("avatarbg", "X")]
+		public int? AvatarBackgroundColor;
+
+        [QueryParam(format: "X")]
+		public int? LeftColor;
+
+        [QueryParam(format: "X")]
+		public int? RightColor;
+
+        [QueryParam(format: "X")]
+		public int? LeftTextColor;
+
+        [QueryParam(format: "X")]
+		public int? RightTextColor;
 
 		public SmallWidgetOptions SetType(SmallWidgetType t)
 		{
@@ -56,36 +70,8 @@ namespace DiscordBotsList.Api.Objects
 			return this;
 		}
 
-		/// <summary>
-		/// Returns the URL that links the small widget.
-		/// </summary>
-		/// <param name="botId">Id of the bot</param>
-		/// <returns>Widget url</returns>
-		public string Build(ulong botId)
-		{
-			string query = $"https://top.gg/api/widget/{ Type.ToString().ToLower() }/{ botId }.svg";
-
-			List<string> args = new List<string>();
-
-			if (!UseAvatar.GetValueOrDefault(true))
-				args.Add($"noavatar=true");
-
-			if (AvatarBackgroundColor != null)
-				args.Add($"avatarbg={AvatarBackgroundColor.Value.ToString("X")}");
-
-			if (LeftColor != null)
-				args.Add($"leftcolor={LeftColor.Value.ToString("X")}");
-
-			if (RightColor != null)
-				args.Add($"rightcolor={RightColor.Value.ToString("X")}");
-
-			if (LeftTextColor != null)
-				args.Add($"lefttextcolor={LeftTextColor.Value.ToString("X")}");
-
-			if (RightTextColor != null)
-				args.Add($"righttextcolor={RightTextColor.Value.ToString("X")}");
-
-			return Utils.CreateQuery(query, args.ToArray());
-		}
-	}
+        public string Build(ulong botId)
+            => DblApi.GetWidgetUrl(botId, Type, Format, AvatarBackgroundColor,
+                LeftColor, RightColor, LeftTextColor, RightTextColor, UseAvatar ?? true);
+    }
 }

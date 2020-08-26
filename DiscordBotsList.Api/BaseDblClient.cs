@@ -14,7 +14,6 @@ namespace DiscordBotsList.Api
 	public class BaseDblClient
 	{
 		protected HttpClient _httpClient;
-        protected const string baseEndpoint = "https://top.gg/api/";
 
 		public BaseDblClient()
 		{
@@ -35,7 +34,7 @@ namespace DiscordBotsList.Api
 
 			foreach(IDblBot bot in result.Items)
 			{
-				(bot as DblBot).Client = this;
+				((DblBot) bot).Client = this;
 			}
 
 			return result;
@@ -87,7 +86,7 @@ namespace DiscordBotsList.Api
 		/// <returns>An object of type T from the specified URL.</returns>
 		protected async Task<T> GetAsync<T>(string url)
 		{
-			HttpResponseMessage t = await _httpClient.GetAsync(baseEndpoint + url);
+			HttpResponseMessage t = await _httpClient.GetAsync(DblApi.BaseUrl + url);
             if (t.IsSuccessStatusCode)
 				return JsonConvert.DeserializeObject<T>(await t.Content.ReadAsStringAsync());
 			return default;

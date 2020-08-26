@@ -1,16 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using DiscordBotsList.Api.Internal;
 
 namespace DiscordBotsList.Api.Objects
 {
     public class LargeWidgetOptions
 	{
-		int? TopColor;
-		int? MiddleColor;	
-		int? UsernameColor;
-		int? CertifiedColor;
-		int? DataColor;
-		int? LabelColor;
-		int? HighlightColor;
+        public WidgetImageFormat Format { get; set; } = WidgetImageFormat.Svg;
+
+		[QueryParam(format: "X")]
+		public int? TopColor { get; set; }
+
+        [QueryParam(format: "X")]
+        public int? MiddleColor { get; set; }
+
+        [QueryParam(format: "X")]
+        public int? UsernameColor { get; set; }
+
+		[QueryParam(format: "X")]
+        public int? CertifiedColor { get; set; }
+
+		[QueryParam(format: "X")]
+        public int? DataColor { get; set; }
+
+		[QueryParam(format: "X")]
+        public int? LabelColor { get; set; }
+
+		[QueryParam(format: "X")]
+        public int? HighlightColor { get; set; }
 
 		public LargeWidgetOptions SetTopColor(int r, int g, int b)
 		{
@@ -48,39 +63,8 @@ namespace DiscordBotsList.Api.Objects
 			return this;
 		}
 
-		/// <summary>
-		/// Builds and returns a value.
-		/// </summary>
-		/// <param name="botId">Id of the bot</param>
-		/// <returns>Widget url</returns>
-		public string Build(ulong botId)
-		{
-			string query = $"https://top.gg/api/widget/{ botId }.svg";
-
-			List<string> args = new List<string>();
-
-			if (TopColor != null)
-				args.Add($"topcolor={TopColor.Value.ToString("X")}");
-
-			if (MiddleColor != null)
-				args.Add($"middlecolor={MiddleColor.Value.ToString("X")}");
-
-			if (UsernameColor != null)
-				args.Add($"usernamecolor={UsernameColor.Value.ToString("X")}");
-
-			if (CertifiedColor != null)
-				args.Add($"certifiedcolor={CertifiedColor.Value.ToString("X")}");
-
-			if (DataColor != null)
-				args.Add($"datacolor={DataColor.Value.ToString("X")}");
-			
-			if (LabelColor != null)
-				args.Add($"labelcolor={LabelColor.Value.ToString("X")}");
-
-			if (HighlightColor != null)
-				args.Add($"highlightcolor={HighlightColor.Value.ToString("X")}");
-
-			return Utils.CreateQuery(query, args.ToArray());
-		}
-	}
+        public string Build(ulong id)
+            => DblApi.GetWidgetUrl(id, Format, TopColor, MiddleColor,
+                UsernameColor, CertifiedColor, DataColor, LabelColor, HighlightColor);
+    }
 }

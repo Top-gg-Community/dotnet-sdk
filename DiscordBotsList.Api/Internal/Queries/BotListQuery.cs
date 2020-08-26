@@ -8,15 +8,15 @@ namespace DiscordBotsList.Api.Internal.Queries
 {
 	internal class BotSearchQuery : ISearchResult<IDblBot>
 	{
-		public IEnumerable<IDblBot> Items => results.Cast<IDblBot>();
+		public IEnumerable<IDblBot> Items => results;
 
-		public int CurrentPage => (int)Math.Ceiling((double)Offset / Limit);
+		public int CurrentPage => (int)Math.Ceiling(Offset / (double)Limit);
 
 		public int ItemsPerPage => Limit;
 
 		public int ItemCount => Total;
 
-		public int PageCount => (int)Math.Ceiling((double)Limit / Count);
+		public int PageCount => (int)Math.Ceiling(Limit / (double)Count);
 
 		[JsonProperty("results")]
 		internal List<DblBot> results { get; set; }

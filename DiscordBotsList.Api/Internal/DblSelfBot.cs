@@ -23,5 +23,8 @@ namespace DiscordBotsList.Api.Internal
 
 		public async Task UpdateStatsAsync(int shardCount, int totalShards, params int[] shards)
 			=> await ((DblClient) Client).UpdateStatsAsync(shardCount, totalShards, shards);
-	}
+
+        public async Task UpdateStatsAsync(int guildCount, int shardCount)
+            => await ((DblClient) Client).UpdateStatsAsync(guildCount, shardCount);
+    }
 }

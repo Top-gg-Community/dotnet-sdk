@@ -2,16 +2,22 @@
 
 namespace DiscordBotsList.Api.Objects
 {
-    public struct VoteObject
+    /// <summary>
+    /// Represents a generic vote object.
+    /// </summary>
+    public readonly struct VoteObject
     {
         internal VoteObject(int voted)
         {
-            _voted = voted;
+            Vote = voted;
         }
 
         [JsonProperty("voted")]
-        private int _voted { get; }
+        private int Vote { get; }
 
-        public bool Voted => _voted == 1;
+        /// <summary>
+        /// Represents the status of this <see cref="VoteObject"/>.
+        /// </summary>
+        public bool Voted => Vote == 1;
     }
 }

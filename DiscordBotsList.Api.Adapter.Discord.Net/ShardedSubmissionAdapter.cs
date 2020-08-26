@@ -2,27 +2,31 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Discord.WebSocket;
-using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Adapter.Discord.Net
 {
-    internal class ShardedSubmissionAdapter : SubmissionAdapter, IAdapter
+    internal class ShardedSubmissionAdapter : SubmissionAdapter
 	{
-		public ShardedSubmissionAdapter(DblClient api, DiscordShardedClient client, TimeSpan updateTime)
-			: base(api, client, updateTime)
-		{ }
+        public ShardedSubmissionAdapter(DblClient api, DiscordShardedClient client, TimeSpan interval)
+            : base(api, client, interval)
+        {
+
+        }
 
 		public override async Task RunAsync()
 		{
-			if (DateTime.Now > lastTimeUpdated + updateTime)
+			if (!(DiscordClient is DiscordShardedClient shardClient))
+				throw new Exception("Expected a sharded client");
+
+			if (DateTime.Now > LastUpdated + Interval)
 			{
-				await api.UpdateStatsAsync(
-					0, 
-					(client as DiscordShardedClient).Shards.Count, 
-					(client as DiscordShardedClient).Shards.Select(x => x.Guilds.Count).ToArray()
+				await Client.UpdateStatsAsync(
+					0,
+                    shardClient.Shards.Count,
+                    shardClient.Shards.Select(x => x.Guilds.Count).ToArray()
 				);
 
-				lastTimeUpdated = DateTime.Now;
+				LastUpdated = DateTime.Now;
 				SendLog("Submitted stats to DiscordBotsList.org");
 			}
 		}

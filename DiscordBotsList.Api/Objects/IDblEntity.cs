@@ -6,7 +6,7 @@
 	public interface IDblEntity
 	{
 		/// <summary>
-		/// Represents the ID of this <see cref="IDblEntity"/>.
+		/// Represents the Discord Snowflake ID of this <see cref="IDblEntity"/>.
 		/// </summary>
 		ulong Id { get; }
 
@@ -16,12 +16,12 @@
 		string Username { get; }
 
 		/// <summary>
-		/// Represents the discriminator for this <see cref="IDblEntity"/>, which is located after the username.
+		/// Represents the discriminator of this <see cref="IDblEntity"/>.
 		/// </summary>
 		string Discriminator { get; }
-		
-		/// <summary>
-		/// Represents the avatar URL for this <see cref="IDblEntity"/>, or a default avatar URL if none could be found.
+
+        /// <summary>
+		/// Represents the avatar URL of this <see cref="IDblEntity"/> (returns the default URL if unspecified).
 		/// </summary>
 		string AvatarUrl { get; }
 	}

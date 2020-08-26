@@ -30,8 +30,8 @@ namespace DiscordBotsList.Api.Tests
 
     public class UnitTests
     {
-        readonly Credentials _cred;
-        readonly DblClient _api;
+        private readonly Credentials _cred;
+        private readonly DblClient _api;
 
 		public UnitTests()
 		{
@@ -52,7 +52,6 @@ namespace DiscordBotsList.Api.Tests
             Assert.False(await _api.HasVotedAsync(0));
         }
 
-        
         [Fact]
         public async Task TaskIsWeekendTestAsync()
         {

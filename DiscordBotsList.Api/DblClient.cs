@@ -41,7 +41,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// Returns a list of all users that have voted for your bot for up to 1,000 entries. If you have more than 1,000, you are required to use webhooks instead.
+        /// Returns a list of all users that have voted for your bot for up to 1,000 entries. If you have more than 1,000 total votes, you are required to use webhooks instead.
         /// </summary>
         /// <returns>A list of all users that have voted.</returns>
         public async Task<List<IDblEntity>> GetVotersAsync()
@@ -56,6 +56,23 @@ namespace DiscordBotsList.Api
         public async Task UpdateStatsAsync(int guildCount)
         {
             await UpdateStatsInternalAsync(new GuildCountObject(guildCount));
+        }
+
+        /// <summary>
+        /// Sends a request to update your stats with a collection of guild counts for each shard.
+        /// </summary>
+        /// <param name="shards">Represents a collection of guild counts for each shard, starting from the specified index.</param>
+        /// <returns></returns>
+        public async Task UpdateStatsAsync(IEnumerable<int> shards)
+        {
+            int[] values = shards.ToArray();
+
+            await UpdateStatsInternalAsync(new ShardedGuildCountObject
+            {
+                ShardId = 0,
+                ShardCount = values.Length,
+                Shards = values.ToArray()
+            });
         }
 
         /// <summary>
@@ -75,7 +92,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// Sends a request to update your stats by guild and shard count.
+        /// Asynchronously sends a request to update your stats by guild and shard count.
         /// </summary>
         /// <param name="guildCount">Represents the current guild count for the bot.</param>
         /// <param name="shardCount">Represents the current shard count that the bot uses.</param>
@@ -99,7 +116,7 @@ namespace DiscordBotsList.Api
         protected async Task<List<T>> GetVotersAsync<T>()
         {
             var query = $"bots/{_id}/votes";
-            return await GetAuthorizedAsync<List<T>>(Utils.CreateQuery(query));
+            return await GetAuthorizedAsync<List<T>>(query);
         }
 
         protected async Task UpdateStatsInternalAsync(object stats)

@@ -8,12 +8,6 @@
 		public static int FromColor(int r, int g, int b)
 			=> (255 << 24) | ((byte)r << 16) | ((byte)g << 8) | ((byte)b << 0);
 
-		/// <summary>
-		/// Creates a URL request query.
-		/// </summary>
-		/// <param name="baseUrl">url</param>
-		/// <param name="args">arguments</param>
-		/// <returns>baseUrl?argument[0]&argument[1]&...</returns>
 		public static string CreateQuery(string baseUrl, params string[] args)
 		{
 			if (args.Length > 0)

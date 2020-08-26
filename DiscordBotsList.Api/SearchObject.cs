@@ -9,7 +9,7 @@ namespace DiscordBotsList.Api
 
 		public override string ToString()
 		{
-			return $"{Field.ToString()}: {Value}";
+			return $"{Field.ToString().ToLower()}: {Value}";
 		}
 	}
 }

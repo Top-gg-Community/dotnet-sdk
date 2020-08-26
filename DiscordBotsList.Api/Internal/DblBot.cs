@@ -11,78 +11,70 @@ namespace DiscordBotsList.Api.Internal
 	{
 		internal BaseDblClient Client;
 
-		[JsonProperty("lib")]
-		internal string library;
+        [JsonProperty("support")]
+		internal string SupportInviteCode { get; }
 
-		[JsonProperty("prefix")]
-		internal string prefix;
-
-		[JsonProperty("shortDesc")]
-		internal string shortDescription;
-
-		[JsonProperty("longDesc")]
-		internal string longDescription;
-
-		[JsonProperty("tags")]
-		internal List<string> tags;
-
-		[JsonProperty("website")]
-		internal string websiteUrl;
-
-		[JsonProperty("support")]
-		internal string supportUrl;
+        [JsonProperty("date")]
+		public DateTime ApprovedAt { get; }
 
 		[JsonProperty("github")]
-		internal string githubUrl;
+        public string GithubUrl { get; }
+
+        [JsonProperty("invite")]
+        internal string CustomInviteUrl { get; }
+
+		public string InviteUrl => CustomInviteUrl ?? DblApi.GetDefaultInviteUrl(Id);
+
+        [JsonProperty("certified")]
+		public bool IsCertified { get; }
+
+        [JsonProperty("lib")]
+		public string LibraryUsed { get; }
+
+        [JsonProperty("longDesc")]
+		public string LongDescription { get; }
+
+        [JsonProperty("prefix")]
+		public string PrefixUsed { get; }
 
 		[JsonProperty("owners")]
-		internal List<ulong> owners;
+		public List<ulong> OwnerIds { get; }
 
-		[JsonProperty("invite")]
-		internal string customInvite;
+		IReadOnlyList<ulong> IDblBot.OwnerIds => OwnerIds;
 
-		[JsonProperty("date")]
-		internal DateTime approvedAt;
+        [JsonProperty("points")]
+		public int Points { get; }
 
-		[JsonProperty("certified")]
-		internal bool certified;
+        [JsonProperty("monthlypoints")]
+		public int MonthlyPoints { get; }
+
+        [JsonProperty("shortDesc")]
+		public string ShortDescription { get; }
+
+        [JsonProperty("tags")]
+		public List<string> Tags { get; }
+
+		IReadOnlyList<string> IDblBot.Tags => Tags;
+
+		public string SupportInviteUrl => $"https://discord.gg/{SupportInviteCode}";
 
 		[JsonProperty("vanity")]
-		internal string vanity;
+        internal string VanityName { get; }
 
-		[JsonProperty("points")]
-		internal int points;
+        public string VanityUrl => string.IsNullOrWhiteSpace(VanityName) ? DblApi.GetVanityUrl(VanityName) : DblApi.GetDefaultVanityUrl(Id);
 
-		public DateTime ApprovedAt => approvedAt;
+        [JsonProperty("website")]
+		public string WebsiteUrl { get; }
 
-		public string GithubUrl => githubUrl;
+		public IReadOnlyList<ulong> FeaturedGuildIds => throw new NotImplementedException();
 
-		public string InviteUrl => customInvite ?? $"https://discordapp.com/oauth2/authorize?&client_id={ Id }&scope=bot";
+		public ulong PrimaryOwnerId => OwnerIds.First();
 
-		public bool IsCertified => certified;
+		public string SupportGuildUrl => throw new NotImplementedException();
 
-		public string LibraryUsed => library;
-
-		public string LongDescription => longDescription;
-
-		public string PrefixUsed => prefix;
-
-		public List<ulong> OwnerIds => owners.ToList();
-
-		public int Points => points;
-
-		public string ShortDescription => shortDescription;
-
-		public List<string> Tags => tags.ToList();
-
-		public string SupportUrl => "https://discord.gg/" + supportUrl;
-
-		public string VanityTag => vanity;
-		public string VanityUrl => "https://top.gg/bots/" + vanity;
-
-		public string WebsiteUrl => websiteUrl;
+		public ulong? DonateBotGuildId => throw new NotImplementedException();
 
 		public async Task<IDblBotStats> GetStatsAsync()
 			=> await Client.GetBotStatsAsync(Id);
-	}
+    }
 }
