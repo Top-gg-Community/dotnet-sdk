@@ -1,9 +1,11 @@
+using System;
 using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DiscordBotList.Models;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace DiscordBotList.Tests
 {
@@ -32,12 +34,14 @@ namespace DiscordBotList.Tests
 
     public class UnitTests
     {
+        private readonly ITestOutputHelper _testOutputHelper;
         private readonly Credentials _cred;
         private readonly BaseDblClient _client;
 
-		public UnitTests()
+		public UnitTests(ITestOutputHelper testOutputHelper)
 		{
-			_cred = Credentials.LoadFromFile("./settings.json");
+            _testOutputHelper = testOutputHelper;
+            _cred = Credentials.LoadFromFile("./settings.json");
             if (_cred == null)
             {
 				_client = new BaseDblClient();
@@ -49,15 +53,12 @@ namespace DiscordBotList.Tests
         }
 
 		[Fact]
-        public void Test_SelfNotNull()
+        public async Task Test_SelfNotNull()
         {
-            if (_cred != null)
-            {
-                Assert.NotNull(((DblClient)_client).GetSelfAsync());
-            }
-
-            Assert.NotNull(_client.GetUserAsync(_cred.BotId));
-		}
+            IDblUser user = await _client.GetUserAsync(181605794159001601);
+            Assert.NotNull(user);
+            _testOutputHelper.WriteLine($"{user.ToString()}");
+        }
 
         [Fact]
         public async Task Test_InvalidVoteIsFalseAsync()
@@ -71,8 +72,9 @@ namespace DiscordBotList.Tests
         [Fact]
         public async Task Test_GetWeekendAsync()
         {
-			await _client.IsWeekendAsync();
-		}
+			bool result = await _client.IsWeekendAsync();
+            _testOutputHelper.WriteLine($"{result}");
+        }
 
         [Fact]
         public async Task Test_GetVotersAsync()

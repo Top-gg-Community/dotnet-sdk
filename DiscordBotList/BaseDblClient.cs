@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Net.Http;
 using DiscordBotList.Internal;
 using DiscordBotList.Models;
@@ -18,6 +19,11 @@ namespace DiscordBotList
 		{
             HttpClient = new HttpClient();
 		}
+
+		~BaseDblClient()
+        {
+			HttpClient.Dispose();
+        }
 
         protected HttpClient HttpClient { get; }
 
@@ -117,11 +123,26 @@ namespace DiscordBotList
 		/// <returns>An object of type T from the specified URL.</returns>
 		protected async Task<T> GetAsync<T>(string endpoint)
 		{
-			HttpResponseMessage result = await HttpClient.GetAsync($"{DblApi.BaseUrl}{endpoint}");
+			HttpResponseMessage response = await HttpClient.GetAsync($"{DblApi.BaseUrl}{endpoint}");
+			ApiResult<T> result;
+			try
+			{
+				result = response.IsSuccessStatusCode
+					? ApiResult<T>.FromSuccess(JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync()))
+					: ApiResult<T>.FromHttpError(response.StatusCode);
+			}
+			catch (Exception ex)
+			{
+				result = ApiResult<T>.FromError(ex);
+			}
 
-            return result.IsSuccessStatusCode
-                ? JsonConvert.DeserializeObject<T>(await result.Content.ReadAsStringAsync())
-                : default;
+			if (!result.IsSuccess)
+				throw new Exception(result.ErrorReason);
+
+			if (result.Value == null)
+				return default;
+
+			return result.Value;
         }
     }
 }

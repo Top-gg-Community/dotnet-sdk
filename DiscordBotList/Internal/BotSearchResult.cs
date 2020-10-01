@@ -11,15 +11,15 @@ namespace DiscordBotList.Internal
 
         IReadOnlyList<IDblBot> ISearchResult<IDblBot>.Values => Values;
 
+        /// <inheritdoc />
+        [JsonProperty("limit")]
+        public int PageSize { get; internal set; }
+
         [JsonProperty("offset")]
         public int Offset { get; internal set; }
 
         [JsonProperty("count")]
         public int Count { get; internal set; }
-
-        /// <inheritdoc />
-        [JsonProperty("limit")]
-        public int PageSize { get; internal set; }
 
         /// <inheritdoc />
         public int PageIndex => Utils.GetCeiling(Offset, PageSize);

@@ -72,5 +72,11 @@ namespace DiscordBotList.Internal
 
             return status;
         }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return $"ID: {Id}\nName: {Username}\nStatus: {Status}\nPageUrl: {PageUrl}\nColorHex: {ColorHex}\nRawColor {RawColor}";
+        }
     }
 }

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using DiscordBotList.Internal;
 using DiscordBotList.Widgets;
 
-namespace DiscordBotList.Internal
+namespace DiscordBotList
 {
     /// <summary>
     /// Represents a helper class for retrieving endpoints related to the Discord Bot List API.
@@ -181,7 +182,7 @@ namespace DiscordBotList.Internal
         internal static string GetSearchEndpoint(BotSearchParams searchParams)
         {
             if (searchParams == null)
-                return GetSearchEndpoint();
+                return BotEndpoint;
 
             string url = BotEndpoint;
             var args = new List<string>();
