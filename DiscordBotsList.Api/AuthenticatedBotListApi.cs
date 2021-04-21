@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using DiscordBotsList.Api.Internal;
+using DiscordBotsList.Api.Objects;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using DiscordBotsList.Api.Internal;
-using DiscordBotsList.Api.Objects;
-using Newtonsoft.Json;
 
 namespace DiscordBotsList.Api
 {
@@ -16,7 +16,7 @@ namespace DiscordBotsList.Api
         private readonly string _token;
 
         public AuthDiscordBotListApi(ulong selfId, string token)
-			: base()
+            : base()
         {
             _selfId = selfId;
             _token = token;
@@ -96,13 +96,13 @@ namespace DiscordBotsList.Api
 
         protected async Task<List<T>> GetVotersAsync<T>()
         {
-             var query = $"bots/{_selfId}/votes";
+            var query = $"bots/{_selfId}/votes";
             return await GetAuthorizedAsync<List<T>>(Utils.CreateQuery(query));
         }
 
         protected async Task UpdateStatsAsync(object statsObject)
         {
-            var json = JsonConvert.SerializeObject(statsObject);
+            var json = JsonSerializer.Serialize(statsObject);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             await _httpClient
                 .PostAsync($"{baseEndpoint}/bots/{_selfId}/stats", httpContent);

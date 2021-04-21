@@ -1,38 +1,38 @@
-﻿using Newtonsoft.Json;
+﻿using DiscordBotsList.Api.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DiscordBotsList.Api.Objects;
+using System.Text.Json.Serialization;
 
 namespace DiscordBotsList.Api.Internal.Queries
 {
-	internal class BotListQuery : ISearchResult<IDblBot>
-	{
-		public List<IDblBot> Items => results
-			.Cast<IDblBot>()
-			.ToList();
+    internal class BotListQuery : ISearchResult<IDblBot>
+    {
+        public List<IDblBot> Items => results
+            .Cast<IDblBot>()
+            .ToList();
 
-		public int CurrentPage => (int)Math.Ceiling((double)offset / limit);
+        public int CurrentPage => (int)Math.Ceiling((double)offset / limit);
 
-		public int ItemsPerPage => limit;
+        public int ItemsPerPage => limit;
 
-		public int TotalItems => total;
+        public int TotalItems => total;
 
-		public int TotalPages => (int)Math.Ceiling((double)limit / count);
+        public int TotalPages => (int)Math.Ceiling((double)limit / count);
 
-		[JsonProperty("results")]
-		public List<Bot> results;
+        [JsonPropertyName("results")]
+        public List<Bot> results;
 
-		[JsonProperty("limit")]
-		public int limit;
+        [JsonPropertyName("limit")]
+        public int limit;
 
-		[JsonProperty("offset")]
-		public int offset;
+        [JsonPropertyName("offset")]
+        public int offset;
 
-		[JsonProperty("count")]
-		public int count;
+        [JsonPropertyName("count")]
+        public int count;
 
-		[JsonProperty("total")]
-		public int total;
-	}
+        [JsonPropertyName("total")]
+        public int total;
+    }
 }

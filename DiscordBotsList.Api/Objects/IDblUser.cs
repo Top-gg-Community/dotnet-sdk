@@ -2,22 +2,22 @@
 {
     public interface IDblUser : IDblEntity
     {
-		string Biography { get; }
+        string Biography { get; }
 
-		string BannerUrl { get; }
+        string BannerUrl { get; }
 
-		SocialConnections Connections { get; }
+        SocialConnections Connections { get; }
 
-		string Color { get; }
+        string Color { get; }
 
-		bool IsSupporter { get; }
+        bool IsSupporter { get; }
 
-		bool IsCertified { get; }
+        bool IsCertified { get; }
 
-		bool IsModerator { get; }
+        bool IsModerator { get; }
 
-		bool IsWebModerator { get; }
+        bool IsWebModerator { get; }
 
-		bool IsAdmin { get; }
+        bool IsAdmin { get; }
     }
 }
