@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Authors>Velddev</Authors>
-    <Company>Velddev</Company>
+    <Authors>Velddev, Faith Viola</Authors>
+    <Company>Top-GG</Company>
     <Description>top.gg api wrapper</Description>
     <Copyright>Mike Veldsink</Copyright>
     <PackageProjectUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</PackageProjectUrl>
@@ -16,7 +16,7 @@
     <AssemblyName>DiscordBotsList.Api</AssemblyName>
     <RootNamespace>DiscordBotsList.Api</RootNamespace>
     <Product>DiscordBotsList.Api</Product>
-    <Version>1.4.0</Version>
+    <Version>2.0.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 

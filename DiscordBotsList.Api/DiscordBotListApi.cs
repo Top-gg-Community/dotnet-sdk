@@ -59,7 +59,8 @@ namespace DiscordBotsList.Api
             => await GetAsync<User>($"users/{id}");
 
         /// <summary>
-        /// Template version of GetBotAsync for internal usage.
+        /// Template 
+        /// of GetBotAsync for internal usage.
         /// </summary>
         /// <typeparam name="T">Type of Bot</typeparam>
         /// <param name="id">Discord id</param>
