@@ -1,45 +1,45 @@
-﻿using Newtonsoft.Json;
-using DiscordBotsList.Api.Objects;
+﻿using DiscordBotsList.Api.Objects;
+using System.Text.Json.Serialization;
 
 namespace DiscordBotsList.Api.Internal
 {
-	internal class User : Entity, IDblUser
-	{
-		[JsonProperty("bio")]
-		internal string biography;
+    internal class User : Entity, IDblUser
+    {
+        [JsonPropertyName("bio")]
+        internal string biography;
 
-		[JsonProperty("banner")]
-		internal string bannerUrl;
+        [JsonPropertyName("banner")]
+        internal string bannerUrl;
 
-		[JsonProperty("social")]
-		internal SocialConnections social;
+        [JsonPropertyName("social")]
+        internal SocialConnections social;
 
-		[JsonProperty("color")]
-		internal string color;
+        [JsonPropertyName("color")]
+        internal string color;
 
-		[JsonProperty("supporter")]
-		internal bool isSupporter;
+        [JsonPropertyName("supporter")]
+        internal bool isSupporter;
 
-		[JsonProperty("certifiedDev")]
-		internal bool isCertified;
+        [JsonPropertyName("certifiedDev")]
+        internal bool isCertified;
 
-		[JsonProperty("mod")]
-		internal bool isModerator;
+        [JsonPropertyName("mod")]
+        internal bool isModerator;
 
-		[JsonProperty("webMod")]
-		internal bool isWebModerator;
+        [JsonPropertyName("webMod")]
+        internal bool isWebModerator;
 
-		[JsonProperty("admin")]
-		internal bool isAdmin;
+        [JsonPropertyName("admin")]
+        internal bool isAdmin;
 
-		public string Biography => biography;
-		public string BannerUrl => bannerUrl;
-		public SocialConnections Connections => social;
-		public string Color => color;
-		public bool IsSupporter => isSupporter;
-		public bool IsCertified => isCertified;
-		public bool IsModerator => isModerator;
-		public bool IsWebModerator => isWebModerator;
-		public bool IsAdmin => isAdmin;
-	}
+        public string Biography => biography;
+        public string BannerUrl => bannerUrl;
+        public SocialConnections Connections => social;
+        public string Color => color;
+        public bool IsSupporter => isSupporter;
+        public bool IsCertified => isCertified;
+        public bool IsModerator => isModerator;
+        public bool IsWebModerator => isWebModerator;
+        public bool IsAdmin => isAdmin;
+    }
 }

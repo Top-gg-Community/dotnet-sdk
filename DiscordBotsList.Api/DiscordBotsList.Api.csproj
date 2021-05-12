@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
-    <Authors>Velddev</Authors>
-    <Company>Velddev</Company>
+    <TargetFramework>net5.0</TargetFramework>
+    <Authors>Velddev, Faith Viola</Authors>
+    <Company>Top.gg</Company>
     <Description>top.gg api wrapper</Description>
     <Copyright>Mike Veldsink</Copyright>
     <PackageProjectUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</PackageProjectUrl>
@@ -16,12 +16,12 @@
     <AssemblyName>DiscordBotsList.Api</AssemblyName>
     <RootNamespace>DiscordBotsList.Api</RootNamespace>
     <Product>DiscordBotsList.Api</Product>
-    <Version>1.4.0</Version>
+    <Version>1.4.5</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="System.Text.Json" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>

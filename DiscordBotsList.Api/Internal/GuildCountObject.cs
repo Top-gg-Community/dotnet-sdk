@@ -1,54 +1,54 @@
-﻿using Newtonsoft.Json;
+﻿using DiscordBotsList.Api.Objects;
 using System.Collections.Generic;
 using System.Linq;
-using DiscordBotsList.Api.Objects;
+using System.Text.Json.Serialization;
 
 namespace DiscordBotsList.Api.Internal
 {
-	internal class GuildCountObject
-	{
-		[JsonProperty("server_count")]
-		internal int guildCount;
+    internal class GuildCountObject
+    {
+        [JsonPropertyName("server_count")]
+        internal int guildCount;
 
-		public GuildCountObject(int count)
-		{
-			guildCount = count;
-		}
-	}
+        public GuildCountObject(int count)
+        {
+            guildCount = count;
+        }
+    }
 
-	internal class BotStatsObject : ShardedObject, IDblBotStats
-	{
-		public int GuildCount => guildCount;
+    internal class BotStatsObject : ShardedObject, IDblBotStats
+    {
+        public int GuildCount => guildCount;
 
-		public IReadOnlyList<int> Shards => shards.ToList();
+        public IReadOnlyList<int> Shards => shards.ToList();
 
-		public int ShardCount => shardCount;
+        public int ShardCount => shardCount;
 
-		[JsonProperty("server_count")]
-		internal int guildCount;
-	}
+        [JsonPropertyName("server_count")]
+        internal int guildCount;
+    }
 
-	internal class ShardedObject
-	{
-		[JsonProperty("shards")]
-		internal int[] shards;
+    internal class ShardedObject
+    {
+        [JsonPropertyName("shards")]
+        internal int[] shards;
 
-		[JsonProperty("shard_count")]
-		internal int shardCount;
-	}
+        [JsonPropertyName("shard_count")]
+        internal int shardCount;
+    }
 
-	internal class ShardedGuildCountObject
-	{
-		[JsonProperty("shards")]
-		public int[] Shards;
+    internal class ShardedGuildCountObject
+    {
+        [JsonPropertyName("shards")]
+        public int[] Shards;
 
-		[JsonProperty("shard_id")]
-		public int ShardId;
+        [JsonPropertyName("shard_id")]
+        public int ShardId;
 
-		[JsonProperty("shard_count")]
-		public int ShardCount;
+        [JsonPropertyName("shard_count")]
+        public int ShardCount;
 
-		[JsonProperty("server_count")]
-		public int GuildCount;
-	}
+        [JsonPropertyName("server_count")]
+        public int GuildCount;
+    }
 }

@@ -2,12 +2,12 @@
 
 namespace DiscordBotsList.Api.Objects
 {
-	public interface IDblBotStats
-	{
-		int GuildCount { get; }
+    public interface IDblBotStats
+    {
+        int GuildCount { get; }
 
-		IReadOnlyList<int> Shards { get; }
+        IReadOnlyList<int> Shards { get; }
 
-		int ShardCount { get; }
-	}
+        int ShardCount { get; }
+    }
 }
