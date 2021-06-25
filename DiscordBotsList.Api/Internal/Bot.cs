@@ -7,50 +7,64 @@ using System.Threading.Tasks;
 
 namespace DiscordBotsList.Api.Internal
 {
-    internal class Bot : Entity, IDblBot
+    public class Bot : Entity, IDblBot
     {
         internal DiscordBotListApi api;
 
         [JsonPropertyName("lib")]
+        [JsonInclude]
         internal string library;
 
         [JsonPropertyName("prefix")]
+        [JsonInclude]
         internal string prefix;
 
         [JsonPropertyName("shortDesc")]
+        [JsonInclude]
         internal string shortDescription;
 
         [JsonPropertyName("longDesc")]
+        [JsonInclude]
         internal string longDescription;
 
         [JsonPropertyName("tags")]
+        [JsonInclude]
         internal List<string> tags;
 
         [JsonPropertyName("website")]
+        [JsonInclude]
         internal string websiteUrl;
 
         [JsonPropertyName("support")]
+        [JsonInclude]
         internal string supportUrl;
 
         [JsonPropertyName("github")]
+        [JsonInclude]
         internal string githubUrl;
 
         [JsonPropertyName("owners")]
+        [JsonInclude]
         internal List<ulong> owners;
 
         [JsonPropertyName("invite")]
+        [JsonInclude]
         internal string customInvite;
 
         [JsonPropertyName("date")]
+        [JsonInclude]
         internal DateTime approvedAt;
 
         [JsonPropertyName("certified")]
+        [JsonInclude]
         internal bool certified;
 
         [JsonPropertyName("vanity")]
+        [JsonInclude]
         internal string vanity;
 
         [JsonPropertyName("points")]
+        [JsonInclude]
         internal int points;
 
         public DateTime ApprovedAt => approvedAt;

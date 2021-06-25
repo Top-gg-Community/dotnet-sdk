@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace DiscordBotsList.Api.Internal
 {
-    internal class Entity : IDblEntity
+    public class Entity : IDblEntity
     {
         public ulong Id => id;
         public string Username => username;
@@ -14,18 +14,23 @@ namespace DiscordBotsList.Api.Internal
             defaultAvatarUrl;
 
         [JsonPropertyName("id")]
+        [JsonInclude]
         internal ulong id;
 
         [JsonPropertyName("username")]
+        [JsonInclude]
         internal string username;
 
         [JsonPropertyName("discrminator")]
+        [JsonInclude]
         internal string discriminator;
 
         [JsonPropertyName("avatar")]
+        [JsonInclude]
         internal string avatarUrl;
 
         [JsonPropertyName("defAvatar")]
+        [JsonInclude]
         internal string defaultAvatarUrl;
 
         public override string ToString()

@@ -59,13 +59,13 @@ namespace DiscordBotsList.Api
             => await GetAsync<User>($"users/{id}");
 
         /// <summary>
-        /// Template 
+        /// Template
         /// of GetBotAsync for internal usage.
         /// </summary>
         /// <typeparam name="T">Type of Bot</typeparam>
         /// <param name="id">Discord id</param>
         /// <returns>Bot object of type T</returns>
-        internal async Task<T> GetBotAsync<T>(ulong id) where T : Bot
+        public async Task<T> GetBotAsync<T>(ulong id) where T : Bot
         {
             T t = await GetAsync<T>($"bots/{id}");
             t.api = this;
