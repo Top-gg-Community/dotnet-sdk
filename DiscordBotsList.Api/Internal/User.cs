@@ -1,51 +1,39 @@
-﻿using DiscordBotsList.Api.Objects;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {
     internal class User : Entity, IDblUser
     {
-        [JsonPropertyName("bio")]
-        //   [JsonInclude]
+        [JsonProperty("bio")]
         internal string biography;
 
-        [JsonPropertyName("banner")]
-        [JsonInclude]
+        [JsonProperty("banner")]
         internal string bannerUrl;
 
-        [JsonPropertyName("social")]
-        [JsonInclude]
+        [JsonProperty("social")]
         internal SocialConnections social;
 
-        [JsonPropertyName("color")]
-        [JsonInclude]
+        [JsonProperty("color")]
         internal string color;
 
-        [JsonPropertyName("supporter")]
-        [JsonInclude]
+        [JsonProperty("supporter")]
         internal bool isSupporter;
 
-        [JsonPropertyName("certifiedDev")]
-        [JsonInclude]
+        [JsonProperty("certifiedDev")]
         internal bool isCertified;
 
-        [JsonPropertyName("mod")]
-        [JsonInclude]
+        [JsonProperty("mod")]
         internal bool isModerator;
 
-        [JsonPropertyName("webMod")]
-        [JsonInclude]
+        [JsonProperty("webMod")]
         internal bool isWebModerator;
 
-        [JsonPropertyName("admin")]
-        [JsonInclude]
+        [JsonProperty("admin")]
         internal bool isAdmin;
 
-        [JsonInclude]
         public string Biography => biography;
-
         public string BannerUrl => bannerUrl;
-
         public SocialConnections Connections => social;
         public string Color => color;
         public bool IsSupporter => isSupporter;
@@ -53,7 +41,5 @@ namespace DiscordBotsList.Api.Internal
         public bool IsModerator => isModerator;
         public bool IsWebModerator => isWebModerator;
         public bool IsAdmin => isAdmin;
-
-        //    internal string BannerUrl1 { get => bannerUrl1; set => bannerUrl1 = value; }
     }
 }

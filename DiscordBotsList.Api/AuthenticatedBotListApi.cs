@@ -1,11 +1,11 @@
 ﻿using DiscordBotsList.Api.Internal;
 using DiscordBotsList.Api.Objects;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DiscordBotsList.Api
@@ -102,7 +102,7 @@ namespace DiscordBotsList.Api
 
         protected async Task UpdateStatsAsync(object statsObject)
         {
-            var json = JsonSerializer.Serialize(statsObject);
+            var json = JsonConvert.SerializeObject(statsObject);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
             await _httpClient
                 .PostAsync($"{baseEndpoint}/bots/{_selfId}/stats", httpContent);

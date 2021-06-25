@@ -16,12 +16,12 @@
     <AssemblyName>DiscordBotsList.Api</AssemblyName>
     <RootNamespace>DiscordBotsList.Api</RootNamespace>
     <Product>DiscordBotsList.Api</Product>
-    <Version>1.4.6</Version>
+    <Version>1.4.7</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="5.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>

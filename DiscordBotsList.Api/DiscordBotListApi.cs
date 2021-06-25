@@ -1,9 +1,9 @@
 ﻿using DiscordBotsList.Api.Internal;
 using DiscordBotsList.Api.Internal.Queries;
 using DiscordBotsList.Api.Objects;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace DiscordBotsList.Api
@@ -59,13 +59,12 @@ namespace DiscordBotsList.Api
             => await GetAsync<User>($"users/{id}");
 
         /// <summary>
-        /// Template
-        /// of GetBotAsync for internal usage.
+        /// Template version of GetBotAsync for internal usage.
         /// </summary>
         /// <typeparam name="T">Type of Bot</typeparam>
         /// <param name="id">Discord id</param>
         /// <returns>Bot object of type T</returns>
-        public async Task<T> GetBotAsync<T>(ulong id) where T : Bot
+        internal async Task<T> GetBotAsync<T>(ulong id) where T : Bot
         {
             T t = await GetAsync<T>($"bots/{id}");
             t.api = this;
@@ -84,8 +83,7 @@ namespace DiscordBotsList.Api
             ApiResult<T> result;
             try
             {
-                result = t.IsSuccessStatusCode ? ApiResult<T>.FromSuccess(JsonSerializer.Deserialize<T>(await t.Content.ReadAsStringAsync()))
-                    : ApiResult<T>.FromHttpError(t.StatusCode);
+                result = t.IsSuccessStatusCode ? ApiResult<T>.FromSuccess(JsonConvert.DeserializeObject<T>(await t.Content.ReadAsStringAsync())) : ApiResult<T>.FromHttpError(t.StatusCode);
             }
             catch (Exception ex)
             {

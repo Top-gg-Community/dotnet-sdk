@@ -1,8 +1,8 @@
-﻿using DiscordBotsList.Api.Objects;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
+using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal.Queries
 {
@@ -20,19 +20,19 @@ namespace DiscordBotsList.Api.Internal.Queries
 
         public int TotalPages => (int)Math.Ceiling((double)limit / count);
 
-        [JsonPropertyName("results")]
+        [JsonProperty("results")]
         public List<Bot> results;
 
-        [JsonPropertyName("limit")]
+        [JsonProperty("limit")]
         public int limit;
 
-        [JsonPropertyName("offset")]
+        [JsonProperty("offset")]
         public int offset;
 
-        [JsonPropertyName("count")]
+        [JsonProperty("count")]
         public int count;
 
-        [JsonPropertyName("total")]
+        [JsonProperty("total")]
         public int total;
     }
 }

@@ -1,22 +1,22 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace DiscordBotsList.Api.Objects
 {
     public class SocialConnections
     {
-        [JsonPropertyName("youtube")]
+        [JsonProperty("youtube")]
         public string YouTubeChannelId { get; internal set; }
 
-        [JsonPropertyName("reddit")]
+        [JsonProperty("reddit")]
         public string RedditName { get; internal set; }
 
-        [JsonPropertyName("twitter")]
+        [JsonProperty("twitter")]
         public string TwitterName { get; internal set; }
 
-        [JsonPropertyName("instagram")]
+        [JsonProperty("instagram")]
         public string InstagramName { get; internal set; }
 
-        [JsonPropertyName("github")]
+        [JsonProperty("github")]
         public string GitHubName { get; internal set; }
     }
 }

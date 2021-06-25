@@ -1,14 +1,13 @@
-﻿using DiscordBotsList.Api.Objects;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
+using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {
     internal class GuildCountObject
     {
-        [JsonPropertyName("server_count")]
-        [JsonInclude]
+        [JsonProperty("server_count")]
         internal int guildCount;
 
         public GuildCountObject(int count)
@@ -25,38 +24,31 @@ namespace DiscordBotsList.Api.Internal
 
         public int ShardCount => shardCount;
 
-        [JsonPropertyName("server_count")]
-        [JsonInclude]
+        [JsonProperty("server_count")]
         internal int guildCount;
     }
 
     internal class ShardedObject
     {
-        [JsonPropertyName("shards")]
-        [JsonInclude]
+        [JsonProperty("shards")]
         internal int[] shards;
 
-        [JsonPropertyName("shard_count")]
-        [JsonInclude]
+        [JsonProperty("shard_count")]
         internal int shardCount;
     }
 
     internal class ShardedGuildCountObject
     {
-        [JsonPropertyName("shards")]
-        [JsonInclude]
+        [JsonProperty("shards")]
         public int[] Shards;
 
-        [JsonPropertyName("shard_id")]
-        [JsonInclude]
+        [JsonProperty("shard_id")]
         public int ShardId;
 
-        [JsonPropertyName("shard_count")]
-        [JsonInclude]
+        [JsonProperty("shard_count")]
         public int ShardCount;
 
-        [JsonPropertyName("server_count")]
-        [JsonInclude]
+        [JsonProperty("server_count")]
         public int GuildCount;
     }
 }

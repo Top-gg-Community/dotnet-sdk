@@ -1,70 +1,56 @@
-﻿using DiscordBotsList.Api.Objects;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {
-    public class Bot : Entity, IDblBot
+    internal class Bot : Entity, IDblBot
     {
         internal DiscordBotListApi api;
 
-        [JsonPropertyName("lib")]
-        [JsonInclude]
+        [JsonProperty("lib")]
         internal string library;
 
-        [JsonPropertyName("prefix")]
-        [JsonInclude]
+        [JsonProperty("prefix")]
         internal string prefix;
 
-        [JsonPropertyName("shortDesc")]
-        [JsonInclude]
+        [JsonProperty("shortDesc")]
         internal string shortDescription;
 
-        [JsonPropertyName("longDesc")]
-        [JsonInclude]
+        [JsonProperty("longDesc")]
         internal string longDescription;
 
-        [JsonPropertyName("tags")]
-        [JsonInclude]
+        [JsonProperty("tags")]
         internal List<string> tags;
 
-        [JsonPropertyName("website")]
-        [JsonInclude]
+        [JsonProperty("website")]
         internal string websiteUrl;
 
-        [JsonPropertyName("support")]
-        [JsonInclude]
+        [JsonProperty("support")]
         internal string supportUrl;
 
-        [JsonPropertyName("github")]
-        [JsonInclude]
+        [JsonProperty("github")]
         internal string githubUrl;
 
-        [JsonPropertyName("owners")]
-        [JsonInclude]
+        [JsonProperty("owners")]
         internal List<ulong> owners;
 
-        [JsonPropertyName("invite")]
-        [JsonInclude]
+        [JsonProperty("invite")]
         internal string customInvite;
 
-        [JsonPropertyName("date")]
-        [JsonInclude]
+        [JsonProperty("date")]
         internal DateTime approvedAt;
 
-        [JsonPropertyName("certified")]
-        [JsonInclude]
+        [JsonProperty("certified")]
         internal bool certified;
 
-        [JsonPropertyName("vanity")]
-        [JsonInclude]
+        [JsonProperty("vanity")]
         internal string vanity;
 
-        [JsonPropertyName("points")]
-        [JsonInclude]
+        [JsonProperty("points")]
         internal int points;
 
         public DateTime ApprovedAt => approvedAt;
@@ -92,7 +78,7 @@ namespace DiscordBotsList.Api.Internal
         public string SupportUrl => "https://discord.gg/" + supportUrl;
 
         public string VanityTag => vanity;
-        public string VanityUrl => "https://top.gg/bot/" + vanity;
+        public string VanityUrl => "https://top.gg/bots/" + vanity;
 
         public string WebsiteUrl => websiteUrl;
 

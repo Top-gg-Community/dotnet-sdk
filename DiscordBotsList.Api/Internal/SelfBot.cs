@@ -1,6 +1,6 @@
-﻿using DiscordBotsList.Api.Objects;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {
