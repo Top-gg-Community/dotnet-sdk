@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -8,22 +9,14 @@ namespace DiscordBotsList.Api.Tests
 {
     public class Credentials
     {
-        public ulong BotId;
-        public string Token;
+        public ulong BotId { get; set; }
+        public string Token { get; set; }
 
-        public static Credentials LoadFromFile(string filePath)
+        public static Credentials LoadFromEnv()
         {
-            if (!File.Exists(filePath))
-            {
-                StreamWriter sw = new StreamWriter(filePath);
-                sw.Write(JsonSerializer.Serialize(new Credentials()));
-                sw.Flush();
-                sw.Close();
-                return null;
-            }
-
-            StreamReader sr = new StreamReader(filePath);
-            var cred = JsonSerializer.Deserialize<Credentials>(sr.ReadToEnd());
+            var cred = new Credentials();
+            cred.BotId = ulong.Parse(Environment.GetEnvironmentVariable("BOT_ID"));
+            cred.Token = Environment.GetEnvironmentVariable("API_KEY");
             return cred;
         }
     }
@@ -35,7 +28,7 @@ namespace DiscordBotsList.Api.Tests
 
         public UnitTests()
         {
-            _cred = Credentials.LoadFromFile("./settings.json");
+            _cred = Credentials.LoadFromEnv();
             _api = new AuthDiscordBotListApi(_cred.BotId, _cred.Token);
         }
 
@@ -73,7 +66,10 @@ namespace DiscordBotsList.Api.Tests
         [Fact]
         public async Task GetBotTestAsync()
         {
-            Assert.NotNull(await _api.GetBotAsync(423593006436712458));
+            var botId = 423593006436712458U;
+            var bot = await _api.GetBotAsync(botId);
+            Assert.NotNull(bot);
+            Assert.Equal(botId, bot.Id);
         }
 
         [Fact]

@@ -5,37 +5,28 @@ namespace DiscordBotsList.Api.Internal
 {
     public class Entity : IDblEntity
     {
-        public ulong Id => id;
-        public string Username => username;
-        public string Discriminator => discriminator;
-
-        public string AvatarUrl => !string.IsNullOrEmpty(avatarUrl) ?
-            $"https://cdn.discordapp.com/{ Id }/{avatarUrl}.png" :
-            defaultAvatarUrl;
+        public string AvatarUrl => !string.IsNullOrEmpty(Avatar) ?
+            $"https://cdn.discordapp.com/{ Id }/{Avatar}.png" :
+            DefaultAvatar;
 
         [JsonPropertyName("id")]
-        [JsonInclude]
-        internal ulong id;
+        public ulong Id { get; set; }
 
         [JsonPropertyName("username")]
-        [JsonInclude]
-        internal string username;
+        public string Username { get; set; }
 
         [JsonPropertyName("discrminator")]
-        [JsonInclude]
-        internal string discriminator;
+        public string Discriminator { get; set; }
 
         [JsonPropertyName("avatar")]
-        [JsonInclude]
-        internal string avatarUrl;
+        public string Avatar { get; set; }
 
         [JsonPropertyName("defAvatar")]
-        [JsonInclude]
-        internal string defaultAvatarUrl;
+        public string DefaultAvatar { get; set; }
 
         public override string ToString()
         {
-            return $"{username}#{discriminator}";
+            return $"{Username}#{Discriminator}";
         }
     }
 }

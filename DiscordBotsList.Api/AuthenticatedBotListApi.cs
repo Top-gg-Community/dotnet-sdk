@@ -116,7 +116,7 @@ namespace DiscordBotsList.Api
         protected async Task<bool> HasVotedAsync(ulong userId)
         {
             var url = $"bots/{_selfId}/check?userId={userId}";
-            return (await GetAsync<dynamic>(url)).voted.ToString().Equals("1");
+            return (await GetAsync<HasVotedObject>(url)).HasVoted.GetValueOrDefault(0) == 1;
         }
     }
 }
