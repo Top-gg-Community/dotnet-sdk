@@ -3,57 +3,35 @@ using System.Text.Json.Serialization;
 
 namespace DiscordBotsList.Api.Internal
 {
-    internal class User : Entity, IDblUser
+    public class User : Entity, IDblUser
     {
         [JsonPropertyName("bio")]
-        //   [JsonInclude]
-        internal string biography;
+        public string Biography { get; set; }
 
         [JsonPropertyName("banner")]
-        [JsonInclude]
-        internal string bannerUrl;
+        public string BannerUrl { get; set; }
 
         [JsonPropertyName("social")]
-        [JsonInclude]
-        internal SocialConnections social;
+        public SocialConnections Social { get; set; }
 
         [JsonPropertyName("color")]
-        [JsonInclude]
-        internal string color;
+        public string Color { get; set; }
 
         [JsonPropertyName("supporter")]
-        [JsonInclude]
-        internal bool isSupporter;
+        public bool IsSupporter { get; set; }
 
         [JsonPropertyName("certifiedDev")]
-        [JsonInclude]
-        internal bool isCertified;
+        public bool IsCertified { get; set; }
 
         [JsonPropertyName("mod")]
-        [JsonInclude]
-        internal bool isModerator;
+        public bool IsModerator { get; set; }
 
         [JsonPropertyName("webMod")]
-        [JsonInclude]
-        internal bool isWebModerator;
+        public bool IsWebModerator { get; set; }
 
         [JsonPropertyName("admin")]
-        [JsonInclude]
-        internal bool isAdmin;
+        public bool IsAdmin { get; set; }
 
-        [JsonInclude]
-        public string Biography => biography;
-
-        public string BannerUrl => bannerUrl;
-
-        public SocialConnections Connections => social;
-        public string Color => color;
-        public bool IsSupporter => isSupporter;
-        public bool IsCertified => isCertified;
-        public bool IsModerator => isModerator;
-        public bool IsWebModerator => isWebModerator;
-        public bool IsAdmin => isAdmin;
-
-        //    internal string BannerUrl1 { get => bannerUrl1; set => bannerUrl1 = value; }
+        public SocialConnections Connections => Social;
     }
 }

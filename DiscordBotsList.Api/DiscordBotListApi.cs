@@ -2,7 +2,9 @@
 using DiscordBotsList.Api.Internal.Queries;
 using DiscordBotsList.Api.Objects;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -11,11 +13,14 @@ namespace DiscordBotsList.Api
     public class DiscordBotListApi
     {
         protected HttpClient _httpClient;
+        private readonly JsonSerializerOptions _serializerOptions;
         protected const string baseEndpoint = "https://top.gg/api/";
 
         public DiscordBotListApi()
         {
             _httpClient = new HttpClient();
+            _serializerOptions = new JsonSerializerOptions();
+            _serializerOptions.Converters.Add(new ULongToStringConverter());
         }
 
         /// <summary>
@@ -27,9 +32,10 @@ namespace DiscordBotsList.Api
         public async Task<ISearchResult<IDblBot>> GetBotsAsync(int count = 50, int page = 0)
         {
             var result = await GetAsync<BotListQuery>("bots");
-
-            foreach (var bot in result.Items)
+            foreach(var bot in result.Items)
+            {
                 (bot as Bot).api = this;
+            }
 
             return result;
         }
@@ -65,9 +71,14 @@ namespace DiscordBotsList.Api
         /// <typeparam name="T">Type of Bot</typeparam>
         /// <param name="id">Discord id</param>
         /// <returns>Bot object of type T</returns>
-        public async Task<T> GetBotAsync<T>(ulong id) where T : Bot
+        internal async Task<T> GetBotAsync<T>(ulong id) where T : Bot
         {
             T t = await GetAsync<T>($"bots/{id}");
+            if(t == null)
+            {
+                return null;
+            }
+
             t.api = this;
             return t;
         }
@@ -81,16 +92,12 @@ namespace DiscordBotsList.Api
         protected async Task<T> GetAsync<T>(string url)
         {
             HttpResponseMessage t = await _httpClient.GetAsync(baseEndpoint + url);
-            ApiResult<T> result;
-            try
-            {
-                result = t.IsSuccessStatusCode ? ApiResult<T>.FromSuccess(JsonSerializer.Deserialize<T>(await t.Content.ReadAsStringAsync()))
-                    : ApiResult<T>.FromHttpError(t.StatusCode);
-            }
-            catch (Exception ex)
-            {
-                result = ApiResult<T>.FromError(ex);
-            }
+            var payload = await t.Content.ReadAsStringAsync();
+            var o = JsonSerializer.Deserialize<T>(payload, _serializerOptions);
+
+            var result = t.IsSuccessStatusCode 
+                ? ApiResult<T>.FromSuccess(await t.Content.ReadFromJsonAsync<T>(_serializerOptions))
+                : ApiResult<T>.FromHttpError(t.StatusCode);
             return result.Value;
         }
 
