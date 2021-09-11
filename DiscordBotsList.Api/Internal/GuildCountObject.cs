@@ -44,7 +44,6 @@ namespace DiscordBotsList.Api.Internal
         {
             get; set;
         }
-            
     }
 
     internal class ShardedGuildCountObject
@@ -60,7 +59,6 @@ namespace DiscordBotsList.Api.Internal
         {
             get; set;
         }
-            
 
         [JsonPropertyName("shard_count")]
         public int ShardCount

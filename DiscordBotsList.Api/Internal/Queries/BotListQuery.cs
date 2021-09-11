@@ -21,9 +21,10 @@ namespace DiscordBotsList.Api.Internal.Queries
         public int TotalPages => (int)Math.Ceiling((double)limit / count);
 
         [JsonPropertyName("results")]
-        public List<Bot> results {
-get; set;}
-
+        public List<Bot> results
+        {
+            get; set;
+        }
 
         [JsonPropertyName("limit")]
         public int limit

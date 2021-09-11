@@ -6,31 +6,31 @@ namespace DiscordBotsList.Api.Objects
 {
     public interface IDblBot : IDblEntity
     {
-        string LibraryUsed { get; }   
+        string LibraryUsed { get; }
 
-        string PrefixUsed { get;} 
+        string PrefixUsed { get; }
 
-        string ShortDescription { get;}
+        string ShortDescription { get; }
 
         string LongDescription { get; }
 
-        List<string> Tags { get;}
+        List<string> Tags { get; }
 
-        string WebsiteUrl { get;}
+        string WebsiteUrl { get; }
 
-        string SupportUrl { get;}
+        string SupportUrl { get; }
 
-        string GithubUrl { get;}
+        string GithubUrl { get; }
 
-        List<ulong> OwnerIds { get;}
+        List<ulong> OwnerIds { get; }
 
-        string InviteUrl { get;}
+        string InviteUrl { get; }
 
         DateTime ApprovedAt { get; }
 
-        bool IsCertified { get;}
+        bool IsCertified { get; }
 
-        string VanityUrl { get;}
+        string VanityUrl { get; }
 
         int Points { get; }
 
