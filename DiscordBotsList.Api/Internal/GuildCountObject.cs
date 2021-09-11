@@ -25,30 +25,53 @@ namespace DiscordBotsList.Api.Internal
         public int ShardCount => shardCount;
 
         [JsonPropertyName("server_count")]
-        internal int guildCount;
+        internal int guildCount
+        {
+            get; set;
+        }
     }
 
     internal class ShardedObject
     {
         [JsonPropertyName("shards")]
-        internal int[] shards;
+        internal int[] shards
+        {
+            get; set;
+        }
 
         [JsonPropertyName("shard_count")]
-        internal int shardCount;
+        internal int shardCount
+        {
+            get; set;
+        }
+            
     }
 
     internal class ShardedGuildCountObject
     {
         [JsonPropertyName("shards")]
-        public int[] Shards;
+        public int[] Shards
+        {
+            get; set;
+        }
 
         [JsonPropertyName("shard_id")]
-        public int ShardId;
+        public int ShardId
+        {
+            get; set;
+        }
+            
 
         [JsonPropertyName("shard_count")]
-        public int ShardCount;
+        public int ShardCount
+        {
+            get; set;
+        }
 
         [JsonPropertyName("server_count")]
-        public int GuildCount;
+        public int GuildCount
+        {
+            get; set;
+        }
     }
 }

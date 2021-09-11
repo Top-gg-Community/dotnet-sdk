@@ -10,12 +10,12 @@ namespace DiscordBotsList.Api.Internal
     internal class ULongToStringConverter : JsonConverter<ulong>
     {
         public override ulong Read(
-            ref Utf8JsonReader reader, 
-            Type typeToConvert, 
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
             JsonSerializerOptions options)
         {
             var stringValue = reader.GetString();
-            if(ulong.TryParse(stringValue, out var value))
+            if (ulong.TryParse(stringValue, out var value))
             {
                 return value;
             }
