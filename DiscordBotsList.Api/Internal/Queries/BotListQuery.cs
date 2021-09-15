@@ -1,8 +1,8 @@
-﻿using System;
+﻿using DiscordBotsList.Api.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal.Queries
 {
@@ -22,12 +22,12 @@ namespace DiscordBotsList.Api.Internal.Queries
             .Cast<IDblBot>()
             .ToList();
 
-        public int CurrentPage => (int) Math.Ceiling((double) offset / limit);
+        public int CurrentPage => (int)Math.Ceiling((double)offset / limit);
 
         public int ItemsPerPage => limit;
 
         public int TotalItems => total;
 
-        public int TotalPages => (int) Math.Ceiling((double) limit / count);
+        public int TotalPages => (int)Math.Ceiling((double)limit / count);
     }
 }

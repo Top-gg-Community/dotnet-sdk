@@ -1,5 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using DiscordBotsList.Api.Objects;
+﻿using DiscordBotsList.Api.Objects;
+using System.Text.Json.Serialization;
 
 namespace DiscordBotsList.Api.Internal
 {

@@ -178,12 +178,12 @@ namespace DiscordBotsList.Api.Objects
     {
         public static int FromColor(float r, float g, float b)
         {
-            return FromColor((int) (r * 255), (int) (g * 255), (int) (b * 255));
+            return FromColor((int)(r * 255), (int)(g * 255), (int)(b * 255));
         }
 
         public static int FromColor(int r, int g, int b)
         {
-            return (255 << 24) | ((byte) r << 16) | ((byte) g << 8) | ((byte) b << 0);
+            return (255 << 24) | ((byte)r << 16) | ((byte)g << 8) | ((byte)b << 0);
         }
 
         /// <summary>

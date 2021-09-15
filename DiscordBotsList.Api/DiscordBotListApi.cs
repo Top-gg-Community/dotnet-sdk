@@ -1,10 +1,10 @@
-﻿using System.Net.Http;
+﻿using DiscordBotsList.Api.Internal;
+using DiscordBotsList.Api.Internal.Queries;
+using DiscordBotsList.Api.Objects;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
-using DiscordBotsList.Api.Internal;
-using DiscordBotsList.Api.Internal.Queries;
-using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api
 {
@@ -31,7 +31,6 @@ namespace DiscordBotsList.Api
         {
             var result = await GetAsync<BotListQuery>("bots");
             foreach (var bot in result.Items) (bot as Bot).api = this;
-
             return result;
         }
 
@@ -76,7 +75,6 @@ namespace DiscordBotsList.Api
         {
             var t = await GetAsync<T>($"bots/{id}");
             if (t == null) return null;
-
             t.api = this;
             return t;
         }
@@ -92,7 +90,6 @@ namespace DiscordBotsList.Api
             var t = await _httpClient.GetAsync(baseEndpoint + url);
             var payload = await t.Content.ReadAsStringAsync();
             var o = JsonSerializer.Deserialize<T>(payload, _serializerOptions);
-
             var result = t.IsSuccessStatusCode
                 ? ApiResult<T>.FromSuccess(await t.Content.ReadFromJsonAsync<T>(_serializerOptions))
                 : ApiResult<T>.FromHttpError(t.StatusCode);

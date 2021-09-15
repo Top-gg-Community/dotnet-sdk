@@ -20,19 +20,19 @@ namespace DiscordBotsList.Api.Objects
 
         internal static ApiResult<T> FromSuccess(T value)
         {
-            return new ApiResult<T> {Value = value, IsSuccess = true};
+            return new ApiResult<T> { Value = value, IsSuccess = true };
         }
 
         internal static ApiResult<T> FromError(Exception ex)
         {
-            return new ApiResult<T> {Value = default, ErrorReason = ex.Message, IsSuccess = false};
+            return new ApiResult<T> { Value = default, ErrorReason = ex.Message, IsSuccess = false };
         }
 
         internal static ApiResult<T>
             FromHttpError(
                 HttpStatusCode statusCode) // This could be altered to collect an object that provides more information
         {
-            return new ApiResult<T> {Value = default, ErrorReason = statusCode.ToString(), IsSuccess = false};
+            return new ApiResult<T> { Value = default, ErrorReason = statusCode.ToString(), IsSuccess = false };
         }
     }
 }

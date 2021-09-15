@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using DiscordBotsList.Api.Objects;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {

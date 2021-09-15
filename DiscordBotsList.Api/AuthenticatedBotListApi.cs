@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using DiscordBotsList.Api.Internal;
+using DiscordBotsList.Api.Objects;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using DiscordBotsList.Api.Internal;
-using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api
 {
@@ -19,7 +19,6 @@ namespace DiscordBotsList.Api
         {
             _selfId = selfId;
             _token = token;
-
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
 
