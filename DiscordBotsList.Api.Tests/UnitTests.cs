@@ -21,8 +21,8 @@ namespace DiscordBotsList.Api.Tests
 
     public class UnitTests
     {
-        private readonly Credentials _cred;
         private readonly AuthDiscordBotListApi _api;
+        private readonly Credentials _cred;
 
         public UnitTests()
         {

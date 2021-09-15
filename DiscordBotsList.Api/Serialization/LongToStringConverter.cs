@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 namespace DiscordBotsList.Api.Internal
 {
     /// <summary>
-    /// Converts API responses from strings to longs and vice versa.
+    ///     Converts API responses from strings to longs and vice versa.
     /// </summary>
     internal class ULongToStringConverter : JsonConverter<ulong>
     {
@@ -15,10 +15,8 @@ namespace DiscordBotsList.Api.Internal
             JsonSerializerOptions options)
         {
             var stringValue = reader.GetString();
-            if (ulong.TryParse(stringValue, out var value))
-            {
-                return value;
-            }
+            if (ulong.TryParse(stringValue, out var value)) return value;
+
             throw new InvalidOperationException();
         }
 

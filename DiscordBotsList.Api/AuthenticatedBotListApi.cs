@@ -1,12 +1,12 @@
-﻿using DiscordBotsList.Api.Internal;
-using DiscordBotsList.Api.Objects;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using DiscordBotsList.Api.Internal;
+using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api
 {
@@ -16,7 +16,6 @@ namespace DiscordBotsList.Api
         private readonly string _token;
 
         public AuthDiscordBotListApi(ulong selfId, string token)
-            : base()
         {
             _selfId = selfId;
             _token = token;
@@ -25,7 +24,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// Gets your own bot with as an ISelfBot
+        ///     Gets your own bot with as an ISelfBot
         /// </summary>
         /// <returns>your own bot with as an ISelfBot</returns>
         public async Task<IDblSelfBot> GetMeAsync()
@@ -36,8 +35,8 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// Gets all voters that have voted on your bot
-        /// Max 1000, If you have more, you MUST use WEBHOOKS instead.
+        ///     Gets all voters that have voted on your bot
+        ///     Max 1000, If you have more, you MUST use WEBHOOKS instead.
         /// </summary>
         /// <returns>A list of voters</returns>
         public async Task<List<IDblEntity>> GetVotersAsync()
@@ -46,7 +45,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// Update your stats unsharded
+        ///     Update your stats unsharded
         /// </summary>
         /// <param name="guildCount">count of guilds</param>
         public async Task UpdateStats(int guildCount)
@@ -55,7 +54,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// Update your stats sharded
+        ///     Update your stats sharded
         /// </summary>
         /// <param name="shardId">Begin shard id</param>
         /// <param name="shardCount">Total shards</param>
@@ -71,7 +70,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// Update your stats sharded
+        ///     Update your stats sharded
         /// </summary>
         /// <param name="guildCount">count of guilds</param>
         /// <param name="shardCount">Total shards</param>
@@ -85,7 +84,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// returns true if user have voted for the past 12 hours
+        ///     returns true if user have voted for the past 12 hours
         /// </summary>
         /// <param name="userId">Amount of days to filter</param>
         /// <returns>True or False</returns>

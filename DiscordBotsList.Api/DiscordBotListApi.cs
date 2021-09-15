@@ -1,18 +1,18 @@
-﻿using DiscordBotsList.Api.Internal;
-using DiscordBotsList.Api.Internal.Queries;
-using DiscordBotsList.Api.Objects;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
+using DiscordBotsList.Api.Internal;
+using DiscordBotsList.Api.Internal.Queries;
+using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api
 {
     public class DiscordBotListApi
     {
-        protected HttpClient _httpClient;
-        private readonly JsonSerializerOptions _serializerOptions;
         protected const string baseEndpoint = "https://top.gg/api/";
+        private readonly JsonSerializerOptions _serializerOptions;
+        protected HttpClient _httpClient;
 
         public DiscordBotListApi()
         {
@@ -22,7 +22,7 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// Gets bots from botlist
+        ///     Gets bots from botlist
         /// </summary>
         /// <param name="count">amount of bots to appear per page (max: 500)</param>
         /// <param name="page">current page to query</param>
@@ -30,66 +30,66 @@ namespace DiscordBotsList.Api
         public async Task<ISearchResult<IDblBot>> GetBotsAsync(int count = 50, int page = 0)
         {
             var result = await GetAsync<BotListQuery>("bots");
-            foreach (var bot in result.Items)
-            {
-                (bot as Bot).api = this;
-            }
+            foreach (var bot in result.Items) (bot as Bot).api = this;
 
             return result;
         }
 
         /// <summary>
-        /// Get specific bot by Discord id
+        ///     Get specific bot by Discord id
         /// </summary>
         /// <param name="id">Discord id</param>
         /// <returns>Bot Object</returns>
         public async Task<IDblBot> GetBotAsync(ulong id)
-            => await GetBotAsync<Bot>(id);
+        {
+            return await GetBotAsync<Bot>(id);
+        }
 
         /// <summary>
-        /// Get bot stats
+        ///     Get bot stats
         /// </summary>
         /// <param name="id">Discord id</param>
         /// <returns>IBotStats object related to the bot</returns>
         public async Task<IDblBotStats> GetBotStatsAsync(ulong id)
-            => await GetAsync<BotStatsObject>($"bots/{id}/stats");
+        {
+            return await GetAsync<BotStatsObject>($"bots/{id}/stats");
+        }
 
         /// <summary>
-        /// Get specific user by Discord id
+        ///     Get specific user by Discord id
         /// </summary>
         /// <param name="id">Discord id</param>
         /// <returns>User Object</returns>
         public async Task<IDblUser> GetUserAsync(ulong id)
-            => await GetAsync<User>($"users/{id}");
+        {
+            return await GetAsync<User>($"users/{id}");
+        }
 
         /// <summary>
-        /// Template
-        /// of GetBotAsync for internal usage.
+        ///     Template
+        ///     of GetBotAsync for internal usage.
         /// </summary>
         /// <typeparam name="T">Type of Bot</typeparam>
         /// <param name="id">Discord id</param>
         /// <returns>Bot object of type T</returns>
         internal async Task<T> GetBotAsync<T>(ulong id) where T : Bot
         {
-            T t = await GetAsync<T>($"bots/{id}");
-            if (t == null)
-            {
-                return null;
-            }
+            var t = await GetAsync<T>($"bots/{id}");
+            if (t == null) return null;
 
             t.api = this;
             return t;
         }
 
         /// <summary>
-        /// Gets and parses objects
+        ///     Gets and parses objects
         /// </summary>
         /// <typeparam name="T">Type to parse to</typeparam>
         /// <param name="url">Url to get from</param>
         /// <returns>Object of type T</returns>
         protected async Task<T> GetAsync<T>(string url)
         {
-            HttpResponseMessage t = await _httpClient.GetAsync(baseEndpoint + url);
+            var t = await _httpClient.GetAsync(baseEndpoint + url);
             var payload = await t.Content.ReadAsStringAsync();
             var o = JsonSerializer.Deserialize<T>(payload, _serializerOptions);
 
@@ -100,10 +100,12 @@ namespace DiscordBotsList.Api
         }
 
         /// <summary>
-        /// returns true if voting multiplier = x2
+        ///     returns true if voting multiplier = x2
         /// </summary>
         /// <returns>True or False</returns>
         public async Task<bool> IsWeekendAsync()
-            => (await GetAsync<WeekendObject>("weekend")).Weekend;
+        {
+            return (await GetAsync<WeekendObject>("weekend")).Weekend;
+        }
     }
 }

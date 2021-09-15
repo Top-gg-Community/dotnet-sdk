@@ -1,28 +1,23 @@
-﻿using DiscordBotsList.Api.Objects;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using DiscordBotsList.Api.Objects;
 
 namespace DiscordBotsList.Api.Internal
 {
     public class Entity : IDblEntity
     {
-        public string AvatarUrl => !string.IsNullOrEmpty(Avatar) ?
-            $"https://cdn.discordapp.com/{ Id }/{Avatar}.png" :
-            DefaultAvatar;
+        [JsonPropertyName("avatar")] public string Avatar { get; set; }
 
-        [JsonPropertyName("id")]
-        public ulong Id { get; set; }
+        [JsonPropertyName("defAvatar")] public string DefaultAvatar { get; set; }
 
-        [JsonPropertyName("username")]
-        public string Username { get; set; }
+        public string AvatarUrl => !string.IsNullOrEmpty(Avatar)
+            ? $"https://cdn.discordapp.com/{Id}/{Avatar}.png"
+            : DefaultAvatar;
 
-        [JsonPropertyName("discrminator")]
-        public string Discriminator { get; set; }
+        [JsonPropertyName("id")] public ulong Id { get; set; }
 
-        [JsonPropertyName("avatar")]
-        public string Avatar { get; set; }
+        [JsonPropertyName("username")] public string Username { get; set; }
 
-        [JsonPropertyName("defAvatar")]
-        public string DefaultAvatar { get; set; }
+        [JsonPropertyName("discrminator")] public string Discriminator { get; set; }
 
         public override string ToString()
         {
