@@ -11,9 +11,9 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
     {
         protected AuthDiscordBotListApi api;
         protected IDiscordClient client;
-        protected TimeSpan updateTime;
 
         protected DateTime lastTimeUpdated;
+        protected TimeSpan updateTime;
 
         public SubmissionAdapter(AuthDiscordBotListApi api, IDiscordClient client, TimeSpan updateTime)
         {
@@ -46,14 +46,17 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
         }
 
         protected void SendLog(string msg)
-            => Log?.Invoke(msg);
+        {
+            Log?.Invoke(msg);
+        }
     }
 
     internal class ShardedSubmissionAdapter : SubmissionAdapter, IAdapter
     {
         public ShardedSubmissionAdapter(AuthDiscordBotListApi api, DiscordShardedClient client, TimeSpan updateTime)
             : base(api, client, updateTime)
-        { }
+        {
+        }
 
         public override async Task RunAsync()
         {

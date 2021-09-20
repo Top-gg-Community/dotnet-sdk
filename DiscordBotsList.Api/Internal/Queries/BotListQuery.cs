@@ -8,6 +8,16 @@ namespace DiscordBotsList.Api.Internal.Queries
 {
     internal class BotListQuery : ISearchResult<IDblBot>
     {
+        [JsonPropertyName("results")] public List<Bot> results { get; set; }
+
+        [JsonPropertyName("limit")] public int limit { get; set; }
+
+        [JsonPropertyName("offset")] public int offset { get; set; }
+
+        [JsonPropertyName("count")] public int count { get; set; }
+
+        [JsonPropertyName("total")] public int total { get; set; }
+
         public List<IDblBot> Items => results
             .Cast<IDblBot>()
             .ToList();
@@ -19,20 +29,5 @@ namespace DiscordBotsList.Api.Internal.Queries
         public int TotalItems => total;
 
         public int TotalPages => (int)Math.Ceiling((double)limit / count);
-
-        [JsonPropertyName("results")]
-        public List<Bot> results;
-
-        [JsonPropertyName("limit")]
-        public int limit;
-
-        [JsonPropertyName("offset")]
-        public int offset;
-
-        [JsonPropertyName("count")]
-        public int count;
-
-        [JsonPropertyName("total")]
-        public int total;
     }
 }

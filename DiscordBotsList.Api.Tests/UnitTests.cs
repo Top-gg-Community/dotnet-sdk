@@ -1,7 +1,5 @@
 using System;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -23,8 +21,8 @@ namespace DiscordBotsList.Api.Tests
 
     public class UnitTests
     {
-        private readonly Credentials _cred;
         private readonly AuthDiscordBotListApi _api;
+        private readonly Credentials _cred;
 
         public UnitTests()
         {

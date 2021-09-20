@@ -3,17 +3,22 @@
 namespace DiscordBotsList.Api.Objects
 {
     public enum WidgetType
-    { STATUS, SERVERS, LIB, UPVOTES, OWNER }
+    {
+        STATUS,
+        SERVERS,
+        LIB,
+        UPVOTES,
+        OWNER
+    }
 
     public class SmallWidgetOptions
     {
-        private WidgetType Type;
-
         private int? AvatarBackgroundColor;
         private int? LeftColor;
-        private int? RightColor;
         private int? LeftTextColor;
+        private int? RightColor;
         private int? RightTextColor;
+        private WidgetType Type;
 
         public SmallWidgetOptions SetType(WidgetType t)
         {
@@ -52,15 +57,15 @@ namespace DiscordBotsList.Api.Objects
         }
 
         /// <summary>
-        /// Builds and returns a value.
+        ///     Builds and returns a value.
         /// </summary>
         /// <param name="botId">Id of the bot</param>
         /// <returns>Widget url</returns>
         public string Build(ulong botId)
         {
-            string query = $"https://top.gg/api/widget/{ Type.ToString().ToLower() }/{ botId }.svg";
+            var query = $"https://top.gg/api/widget/{Type.ToString().ToLower()}/{botId}.svg";
 
-            List<string> args = new List<string>();
+            var args = new List<string>();
 
             if (AvatarBackgroundColor != null)
                 args.Add($"avatarbg={AvatarBackgroundColor.Value.ToString("X")}");
@@ -83,13 +88,13 @@ namespace DiscordBotsList.Api.Objects
 
     public class LargeWidgetOptions
     {
-        private int? TopColor;
-        private int? MiddleColor;
-        private int? UsernameColor;
         private int? CertifiedColor;
         private int? DataColor;
-        private int? LabelColor;
         private int? HighlightColor;
+        private int? LabelColor;
+        private int? MiddleColor;
+        private int? TopColor;
+        private int? UsernameColor;
 
         public LargeWidgetOptions SetTopColor(int r, int g, int b)
         {
@@ -134,15 +139,15 @@ namespace DiscordBotsList.Api.Objects
         }
 
         /// <summary>
-        /// Builds and returns a value.
+        ///     Builds and returns a value.
         /// </summary>
         /// <param name="botId">Id of the bot</param>
         /// <returns>Widget url</returns>
         public string Build(ulong botId)
         {
-            string query = $"https://top.gg/api/widget/{ botId }.svg";
+            var query = $"https://top.gg/api/widget/{botId}.svg";
 
-            List<string> args = new List<string>();
+            var args = new List<string>();
 
             if (TopColor != null)
                 args.Add($"topcolor={TopColor.Value.ToString("X")}");
@@ -172,23 +177,25 @@ namespace DiscordBotsList.Api.Objects
     internal static class Utils
     {
         public static int FromColor(float r, float g, float b)
-            => FromColor((int)(r * 255), (int)(g * 255), (int)(b * 255));
+        {
+            return FromColor((int)(r * 255), (int)(g * 255), (int)(b * 255));
+        }
 
         public static int FromColor(int r, int g, int b)
-            => (255 << 24) | ((byte)r << 16) | ((byte)g << 8) | ((byte)b << 0);
+        {
+            return (255 << 24) | ((byte)r << 16) | ((byte)g << 8) | ((byte)b << 0);
+        }
 
         /// <summary>
-        /// Creates rest parameters
+        ///     Creates rest parameters
         /// </summary>
         /// <param name="baseUrl">url</param>
         /// <param name="args">arguments</param>
         /// <returns>baseUrl?argument[0]&argument[1]&...</returns>
         public static string CreateQuery(string baseUrl, params string[] args)
         {
-            if (args.Length > 0)
-            {
-                return $"{baseUrl}?{string.Join("&", args)}";
-            }
+            if (args.Length > 0) return $"{baseUrl}?{string.Join("&", args)}";
+
             return baseUrl;
         }
     }

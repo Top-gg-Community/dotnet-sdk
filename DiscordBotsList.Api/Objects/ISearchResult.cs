@@ -5,27 +5,27 @@ namespace DiscordBotsList.Api.Objects
     public interface ISearchResult<T>
     {
         /// <summary>
-        /// Items returned from search
+        ///     Items returned from search
         /// </summary>
         List<T> Items { get; }
 
         /// <summary>
-        /// The current page you've navigated
+        ///     The current page you've navigated
         /// </summary>
         int CurrentPage { get; }
 
         /// <summary>
-        /// Set items per page
+        ///     Set items per page
         /// </summary>
         int ItemsPerPage { get; }
 
         /// <summary>
-        /// Total amount of items found in the search
+        ///     Total amount of items found in the search
         /// </summary>
         int TotalItems { get; }
 
         /// <summary>
-        /// Total amount of pages found in the search
+        ///     Total amount of pages found in the search
         /// </summary>
         int TotalPages { get; }
     }
