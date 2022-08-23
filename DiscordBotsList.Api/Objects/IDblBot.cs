@@ -49,6 +49,6 @@ namespace DiscordBotsList.Api.Objects
 
         Task UpdateStatsAsync(int[] shards);
 
-        Task UpdateStatsAsync(int shardCount, int totalShards, params int[] shards);
+        Task UpdateStatsAsync(int shardId, int shardCount, params int[] shards);
     }
 }

@@ -31,9 +31,9 @@ namespace DiscordBotsList.Api.Internal
             await ((AuthDiscordBotListApi)api).UpdateStats(0, shards.Length, shards);
         }
 
-        public async Task UpdateStatsAsync(int shardCount, int totalShards, params int[] shards)
+        public async Task UpdateStatsAsync(int shardId, int shardCount, params int[] shards)
         {
-            await ((AuthDiscordBotListApi)api).UpdateStats(shardCount, totalShards, shards);
+            await ((AuthDiscordBotListApi)api).UpdateStats(shardId, shardCount, shards);
         }
     }
 }
