@@ -11,13 +11,13 @@ namespace DiscordBotsList.Api.Internal
 
         public string AvatarUrl => !string.IsNullOrEmpty(Avatar)
             ? $"https://cdn.discordapp.com/{Id}/{Avatar}.png"
-            : DefaultAvatar;
+            : $"https://cdn.discordapp.com/{Id}/{DefaultAvatar}.png";
 
         [JsonPropertyName("id")] public ulong Id { get; set; }
 
         [JsonPropertyName("username")] public string Username { get; set; }
 
-        [JsonPropertyName("discrminator")] public string Discriminator { get; set; }
+        [JsonPropertyName("discriminator")] public string Discriminator { get; set; }
 
         public override string ToString()
         {

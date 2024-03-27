@@ -6,8 +6,6 @@ namespace DiscordBotsList.Api.Objects
 {
     public interface IDblBot : IDblEntity
     {
-        string LibraryUsed { get; }
-
         string PrefixUsed { get; }
 
         string ShortDescription { get; }
@@ -33,6 +31,8 @@ namespace DiscordBotsList.Api.Objects
         string VanityUrl { get; }
 
         int Points { get; }
+        
+        int MonthlyPoints { get; }
 
         Task<IDblBotStats> GetStatsAsync();
     }
