@@ -11,8 +11,6 @@ namespace DiscordBotsList.Api.Internal
     {
         internal DiscordBotListApi api;
 
-        [JsonPropertyName("lib")] public string library { get; set; }
-
         [JsonPropertyName("prefix")] public string prefix { get; set; }
 
         [JsonPropertyName("shortDesc")] public string shortDescription { get; set; }
@@ -48,8 +46,6 @@ namespace DiscordBotsList.Api.Internal
         public string InviteUrl => customInvite ?? $"https://discord.com/oauth2/authorize?&client_id={Id}&scope=bot";
 
         public bool IsCertified => certified;
-
-        public string LibraryUsed => library;
 
         public string LongDescription => longDescription;
 

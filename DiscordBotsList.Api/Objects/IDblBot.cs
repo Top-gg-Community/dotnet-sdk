@@ -6,8 +6,6 @@ namespace DiscordBotsList.Api.Objects
 {
     public interface IDblBot : IDblEntity
     {
-        string LibraryUsed { get; }
-
         string PrefixUsed { get; }
 
         string ShortDescription { get; }
