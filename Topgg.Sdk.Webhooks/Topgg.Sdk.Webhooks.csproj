@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Authors>Velddev, Faith, null8626</Authors>
+        <Company>Top.gg</Company>
+        <Description>The community-maintained .NET SDK for Top.gg Webhooks.</Description>
+        <Copyright>Mike Veldsink</Copyright>
+        <PackageProjectUrl>https://github.com/Top-gg-Community/dotnet-sdk</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Top-gg-Community/dotnet-sdk</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>discord bots topgg api webhooks aspnet</PackageTags>
+        <Version>1.0.0</Version>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <AssemblyName>Topgg.Sdk.Webhooks</AssemblyName>
+        <RootNamespace>Topgg.Sdk.Webhooks</RootNamespace>
+        <Product>The .NET SDK for Top.gg Webhooks</Product>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore" Version="2.3.9" />
+        <PackageReference Include="System.Text.Json" Version="10.0.2" />
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.24" />
+        <PackageReference Include="xunit.v3" Version="3.2.2" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <EmbeddedResource Include="Tests\Mocks\*.json" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(Configuration)' != 'Debug'">
+        <Compile Remove="Tests\**" />
+        <None Remove="Tests\**" />
+    </ItemGroup>
+</Project>

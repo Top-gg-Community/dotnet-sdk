@@ -1,5 +1,4 @@
 *.user
-*.json
 */.vs
 .vs/
 */obj
