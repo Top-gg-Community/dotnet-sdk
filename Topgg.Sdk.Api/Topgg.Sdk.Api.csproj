@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Authors>Velddev, Faith, null8626</Authors>
+        <Company>Top.gg</Company>
+        <Description>The community-maintained .NET SDK for the Top.gg API.</Description>
+        <Copyright>Mike Veldsink</Copyright>
+        <PackageProjectUrl>https://github.com/Top-gg-Community/dotnet-sdk</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/Top-gg-Community/dotnet-sdk</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>discord bots topgg api</PackageTags>
+        <PackageReleaseNotes>Adapt to Top.gg API v1</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <AssemblyName>Topgg.Sdk.Api</AssemblyName>
+        <RootNamespace>Topgg.Sdk.Api</RootNamespace>
+        <Product>The .NET SDK for the Top.gg API</Product>
+        <Version>1.0.0</Version>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="10.0.3" />
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+    </ItemGroup>
+    <ItemGroup Condition="'$(Configuration)' == 'Debug'">
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.3.0" />
+        <PackageReference Include="xunit.v3" Version="3.2.2" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <EmbeddedResource Include="Tests\Mocks\*.json" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(Configuration)' != 'Debug'">
+        <Compile Remove="Tests\**" />
+        <None Remove="Tests\**" />
+    </ItemGroup>
+</Project>
