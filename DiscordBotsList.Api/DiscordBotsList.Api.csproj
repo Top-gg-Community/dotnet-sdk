@@ -4,20 +4,21 @@
         <TargetFramework>net8.0</TargetFramework>
         <Authors>Velddev, Faith</Authors>
         <Company>Top.gg</Company>
-        <Description>top.gg api wrapper</Description>
+        <Description>Top.gg API wrapper for .NET. Supports the current v1 API (projects, votes, metrics, announcements, commands) with webhook signature verification, plus the legacy v0 API.</Description>
         <Copyright>Mike Veldsink</Copyright>
-        <PackageProjectUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/DiscordBotList/DBL-dotnet-Library</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/top-gg-community/dotnet-sdk</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/top-gg-community/dotnet-sdk</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageTags>discord bots list org wrapper api</PackageTags>
-        <PackageReleaseNotes>update to net 8</PackageReleaseNotes>
+        <PackageTags>discord bots topgg api wrapper webhooks</PackageTags>
+        <PackageReleaseNotes>Add Top.gg v1 API client, webhook signature verification (HMAC SHA-256) and webhook event models; fix legacy v0 authentication (raw token, no Bearer prefix).</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <AssemblyName>DiscordBotsList.Api</AssemblyName>
         <RootNamespace>DiscordBotsList.Api</RootNamespace>
         <Product>DiscordBotsList.Api</Product>
-        <Version>1.6.0</Version>
+        <Version>1.7.0</Version>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -25,9 +26,17 @@
     </ItemGroup>
 
     <ItemGroup>
+        <InternalsVisibleTo Include="DiscordBotsList.Api.Tests" />
+    </ItemGroup>
+
+    <ItemGroup>
         <None Include="..\LICENSE">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
+        </None>
+        <None Include="..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
         </None>
     </ItemGroup>
 

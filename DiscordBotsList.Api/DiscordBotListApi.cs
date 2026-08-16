@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace DiscordBotsList.Api
 {
+    /// <summary>
+    ///     Base client for the legacy Top.gg <c>v0</c> API
+    ///     (<c>https://top.gg/api</c>). Use <see cref="TopggV1Client" /> for the current
+    ///     v1 API.
+    /// </summary>
     public class DiscordBotListApi
     {
         protected const string baseEndpoint = "https://top.gg/api/";
@@ -71,16 +76,13 @@ namespace DiscordBotsList.Api
         /// </summary>
         /// <typeparam name="T">Type to parse to</typeparam>
         /// <param name="url">Url to get from</param>
-        /// <returns>Object of type T</returns>
+        /// <returns>Object of type T, or default when the request is not successful</returns>
         protected async Task<T> GetAsync<T>(string url)
         {
-            var t = await _httpClient.GetAsync(baseEndpoint + url);
-            var payload = await t.Content.ReadAsStringAsync();
-            var o = JsonSerializer.Deserialize<T>(payload, _serializerOptions);
-            var result = t.IsSuccessStatusCode
-                ? ApiResult<T>.FromSuccess(await t.Content.ReadFromJsonAsync<T>(_serializerOptions))
-                : ApiResult<T>.FromHttpError(t.StatusCode);
-            return result.Value;
+            var response = await _httpClient.GetAsync(baseEndpoint + url);
+            return response.IsSuccessStatusCode
+                ? await response.Content.ReadFromJsonAsync<T>(_serializerOptions)
+                : default;
         }
 
         /// <summary>

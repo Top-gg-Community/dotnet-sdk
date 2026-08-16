@@ -14,9 +14,11 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 
         protected DateTime lastTimeUpdated;
         protected TimeSpan updateTime;
+        protected volatile bool stopped;
 
         public SubmissionAdapter(AuthDiscordBotListApi api, IDiscordClient client, TimeSpan updateTime)
         {
+            this.api = api;
             this.client = client;
             this.updateTime = updateTime;
         }
@@ -25,6 +27,8 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 
         public virtual async Task RunAsync()
         {
+            if (stopped) return;
+
             if (DateTime.Now > lastTimeUpdated + updateTime)
             {
                 await api.UpdateStats(
@@ -38,11 +42,12 @@ namespace DiscordBotsList.Api.Adapter.Discord.Net
 
         public virtual void Start()
         {
+            stopped = false;
         }
 
         public virtual void Stop()
         {
-            throw new NotImplementedException();
+            stopped = true;
         }
 
         protected void SendLog(string msg)
