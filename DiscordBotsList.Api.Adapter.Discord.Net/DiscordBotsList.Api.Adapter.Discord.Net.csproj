@@ -5,16 +5,17 @@
         <Authors>Velddev, Faith</Authors>
         <Company>Top.gg</Company>
         <Product>DiscordBotsList.Api.Adapter.Discord.Net</Product>
-        <Description>Top.gg API adapter for Discord.Net</Description>
-        <PackageReleaseNotes>Initial release</PackageReleaseNotes>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Description>Top.gg API adapter for Discord.Net: auto-posts server and shard counts using the current v1 API or the legacy v0 API.</Description>
+        <PackageReleaseNotes>Add adapter for the Top.gg v1 API and fix the v0 stats submission adapter (api field was never assigned).</PackageReleaseNotes>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <Copyright>Mike Veldsink</Copyright>
         <PackageTags>discord bots topgg api discord.net</PackageTags>
         <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://github.com/Top-gg-Community/dotnet-sdk</RepositoryUrl>
-        <PackageProjectUrl>https://github.com/Top-gg-Community/dotnet-sdk</PackageProjectUrl>
-        <Version>1.6.0</Version>
+        <RepositoryUrl>https://github.com/top-gg-community/dotnet-sdk</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/top-gg-community/dotnet-sdk</PackageProjectUrl>
+        <Version>1.7.0</Version>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,6 +30,10 @@
         <None Include="..\LICENSE">
             <Pack>True</Pack>
             <PackagePath></PackagePath>
+        </None>
+        <None Include="..\README.md">
+            <Pack>True</Pack>
+            <PackagePath>\</PackagePath>
         </None>
     </ItemGroup>
 
