@@ -111,6 +111,41 @@ bool voted = await api.HasVotedAsync(123456789012345678UL);
 
 `GetVoteStatusAsync`/`HasVotedAsync` return `null`/`false` when the user has no active vote (`GET /projects/@me/votes/:userId` returns `404`).
 
+### Caching votes
+
+Checking votes on every command quickly eats the API budget (100 req/s globally, 60 req/min on bot routes, with 1-hour blocks). Keep a `VoteCache` fed by webhooks and read the answer locally:
+
+```cs
+var cache = new VoteCache();
+
+// In your webhook handler
+cache.HandleWebhookEvent(verifiedEvent);
+
+// Rewards, per-command checks, anywhere
+if (cache.HasActiveVote(123456789012345678UL))
+    await GrantRewardAsync();
+```
+
+Backfill or refresh on demand from the API when the cache misses:
+
+```cs
+await cache.SyncAsync(api, DateTimeOffset.UtcNow.AddDays(-7));   // recent vote history
+CachedVote vote = await cache.RefreshUserAsync(api, "123456789012345678", VoteSource.Discord);
+```
+
+### Auto-posting stats
+
+`TopggAutoPoster` posts metrics on a timer and works for any project type, not just Discord.Net bots:
+
+```cs
+var poster = new TopggAutoPoster(api, () => Task.FromResult(ProjectMetrics.ForDiscordBot(serverCount: 420, shardCount: 67)));
+poster.Posted += metrics => { Console.WriteLine($"Posted {metrics.ServerCount} servers"); return Task.CompletedTask; };
+poster.Start();
+// poster.Stop() when done
+```
+
+It posts immediately on `Start()`, then every 30 minutes by default.
+
 ### Errors
 
 On a non-success response the client throws `TopggApiException` with the RFC 7807 problem details and, for `429 Too Many Requests`, the `Retry-After` delay:
