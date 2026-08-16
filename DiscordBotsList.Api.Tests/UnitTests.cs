@@ -19,38 +19,52 @@ namespace DiscordBotsList.Api.Tests
         }
     }
 
+    /// <summary>
+    ///     Live integration tests. They require the BOT_ID and API_KEY environment
+    ///     variables (a legacy v0 token) and are skipped when they are not present.
+    /// </summary>
     public class UnitTests
     {
         private readonly AuthDiscordBotListApi _api;
-        private readonly Credentials _cred;
+        private readonly bool _available;
 
         public UnitTests()
         {
-            _cred = Credentials.LoadFromEnv();
-            _api = new AuthDiscordBotListApi(_cred.BotId, _cred.Token);
+            var botId = Environment.GetEnvironmentVariable("BOT_ID");
+            var apiKey = Environment.GetEnvironmentVariable("API_KEY");
+
+            _available = !string.IsNullOrEmpty(botId) && !string.IsNullOrEmpty(apiKey);
+            if (_available)
+            {
+                _api = new AuthDiscordBotListApi(ulong.Parse(botId), apiKey);
+            }
         }
 
         [Fact]
         public async Task HasVotedTestAsync()
         {
+            if (!_available) return;
             Assert.False(await _api.HasVoted(0));
         }
 
         [Fact]
         public async Task TaskIsWeekendTestAsync()
         {
+            if (!_available) return;
             await _api.IsWeekendAsync();
         }
 
         [Fact]
         public async Task TaskGetVotersTestAsync()
         {
+            if (!_available) return;
             Assert.NotNull(await _api.GetVotersAsync());
         }
 
         [Fact]
         public async Task GetBotTestAsync()
         {
+            if (!_available) return;
             var botId = 1026525568344264724U;
             var bot = await _api.GetBotAsync(botId);
             Assert.NotNull(bot);
@@ -60,12 +74,14 @@ namespace DiscordBotsList.Api.Tests
         [Fact]
         public async Task GetMeTestAsync()
         {
+            if (!_available) return;
             Assert.NotNull(await _api.GetMeAsync());
         }
 
         [Fact]
         public async Task GetUsersGetStatsTest()
         {
+            if (!_available) return;
             var bots = await _api.GetBotsAsync();
 
             Assert.NotNull(bots);
