@@ -19,6 +19,12 @@ namespace DiscordBotsList.Api
         Date,
     }
 
+    /// <summary>
+    ///     Authenticated client for the legacy Top.gg <c>v0</c> API
+    ///     (<c>https://top.gg/api</c>). v0 remains functional for existing projects but
+    ///     does not receive new features. New integrations should use
+    ///     <see cref="TopggV1Client" /> with a v1 (Bearer) token instead.
+    /// </summary>
     public class AuthDiscordBotListApi : DiscordBotListApi
     {
         private readonly ulong _selfId;
@@ -26,7 +32,10 @@ namespace DiscordBotsList.Api
         public AuthDiscordBotListApi(ulong selfId, string token)
         {
             _selfId = selfId;
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            // The legacy v0 API expects the token directly in the Authorization header,
+            // without the Bearer prefix. Use TopggV1Client for the current v1 API, which
+            // requires `Authorization: Bearer <token>`.
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token);
         }
 
         /// <summary>
