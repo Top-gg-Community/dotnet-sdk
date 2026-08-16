@@ -239,6 +239,10 @@ namespace DiscordBotsList.Api
                 }
 
                 cursor = page.Cursor;
+                if (string.IsNullOrWhiteSpace(cursor))
+                {
+                    yield break;
+                }
             }
         }
 
